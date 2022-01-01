@@ -3,31 +3,35 @@
 }
 
 .pry_card {
+   /* background-color: #fff; */
+   vertical-align: middle;
+   /* margin: auto; */
    background-color: #fff;
+   border-radius: 5px;
+   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+   display: flex;
+   line-height: 90%;
+   max-width: 200px;
+   max-height: 50px;
+   margin: 5px;
+   overflow: hidden;
+   /* width: 300px; */
   }
 
-  .card_right {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-    display: flex;
-    line-height: 90%;
-    max-width: 200px;
-    max-height: 50px;
-    margin: 5px;
-    overflow: hidden;
-    width: 100%;
+  .card-right {
+    /* padding: 5px; */
+    /* margin: auto; */
+    padding-top: 10px;
+    padding-left: 10px;
+    /* position: relative; */
+    width: 200px;
   }
-
-  .card_right h4 {
-    letter-spacing: 0.4px;
-    margin: 2px 0;
-  }
-
+  
   .card-left {
     background-color: #FFDB00;
     color: #fff;
     padding: 5px;
+    padding-top: 10px;
     width: 50px;
   }
 
@@ -40,8 +44,4 @@
     text-decoration: none;
   }
 
-  .card-right {
-    padding: 5px;
-    position: relative;
-    width: 100%;
-  }
+  
