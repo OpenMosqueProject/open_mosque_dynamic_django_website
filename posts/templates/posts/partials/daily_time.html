@@ -1,0 +1,75 @@
+{% load static %}
+<div>
+    <div>   
+    <small>{{today}}</small>
+    <img src="https://img.icons8.com/color/24/000000/kaaba.png"/>
+    <small>{{hijri}}</small>
+  </div>
+  
+  <div class="pry_card">
+    <div class="card_right">
+      <div class="card-left">
+        <h2> <img src="{% static 'images/sunrise.png' %}" width="30px" alt="Fajr"> </h2>
+        
+      </div>
+      <div class="card-right">
+        <strong>Fajr: <span id="T_Fajr">{{fajr}}</span></strong>
+        <p>Jamaah: {{fajr_j}} <img src="{% static 'images/sunrise_x16.png' %}" alt=""><small> {{sunrise}}</small></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pry_card">
+    <div class="card_right">
+    <div class="card-left" style="background-color: #A9F2E5;">
+        <h2> <img src="{% static 'images/sun.png' %}" width="30px" alt="Dhuhr"> </h2>
+        
+      </div>
+      <div class="card-right">
+        <strong>Dhuhr: {{Dhuhr}}</strong>
+        <p>Jamaah: {{dhuhr_j}} </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pry_card">
+    <div class="card_right">
+    <div class="card-left" style="background-color: #EE9666;">
+        <h2> <img src="{% static 'images/sunset.png' %}" width="30px" alt="Asr"> </h2>
+        
+      </div>
+      <div class="card-right">
+        <strong>Asr: {{asr}}</strong>
+        <p>Jamaah: {{asr_j}}
+          <!-- <span id="T_asr_j"></span> <img src="{% static 'images/sunset_x24.png' %}" alt=""><small><span id="T_Sunset"></span></small> -->
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pry_card">
+    <div class="card_right">
+    <div class="card-left" style="background-color: #168d78;">
+        <h2> <img src="{% static 'images/moonrise.png' %}" width="30px" alt="Maghrib"> </h2>
+        
+      </div>
+      <div class="card-right">
+        <strong>Maghrib: {{maghrib}} </strong>
+        <p>Jamaah: {{maghrib_j}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pry_card">
+    <div class="card_right">
+    <div class="card-left" style="background-color: #8d8d8d;">
+        <h2> <img src="{% static 'images/night.png' %}" width="30px" alt="Isha"> </h2>
+        
+      </div>
+      <div class="card-right">
+        <strong>Isha: {{isha}}</strong>
+        <p>Jamaah: {{isha_i}}</p>
+      </div>
+    </div>
+  </div>
+</div>

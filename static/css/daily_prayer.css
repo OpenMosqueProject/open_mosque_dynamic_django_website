@@ -1,0 +1,47 @@
+.pry_title {
+    text-align: center;
+}
+
+.pry_card {
+   background-color: #fff;
+  }
+
+  .card_right {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    line-height: 90%;
+    max-width: 200px;
+    max-height: 50px;
+    margin: 5px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .card_right h4 {
+    letter-spacing: 0.4px;
+    margin: 2px 0;
+  }
+
+  .card-left {
+    background-color: #FFDB00;
+    color: #fff;
+    padding: 5px;
+    width: 50px;
+  }
+
+  .card-left a {
+    color: #fff;
+    display: inline-block;
+    font-size: 5px;
+    opacity: 0.6;
+    margin-top: 5px;
+    text-decoration: none;
+  }
+
+  .card-right {
+    padding: 5px;
+    position: relative;
+    width: 100%;
+  }
