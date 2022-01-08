@@ -10,6 +10,11 @@ from .models import Post
 city = 'London'
 country = 'GB'
 method = 2
+longitude = 0.219730
+latitude = 51.443909
+current_time = datetime.datetime.now()
+month = current_time.month
+year = current_time.year
 fajr_jamaah_minutes = 15
 dhuhr_jamaah_minutes = 15
 asr_jamaah_minutes = 15
@@ -45,3 +50,15 @@ def home(request):
         'fajr':fajr,'sunrise':sunrise, 'dhuhr':dhuhr, 'asr':asr, 'maghrib':maghrib, 'isha':isha, 'today':today, 'hijri':hijri}
     
     return render(request, 'posts/home.html', context)
+
+def month_view(request):
+    month_api = requests.get(f'http://api.aladhan.com/v1/calendar?latitude={latitude}&longitude={longitude}&country={country}&method={method}&month={month}&year={year}')
+    data = month_api.json()
+    d = data['data']
+    #####
+    # The data for the table needs to be parsed in HTML. 
+    # TODO - see if there is a built in HTMX module for parsing the JSON data from the backend.
+    # The backend will be continued to source the data as opposed to making the API call from the front end
+    # because the backend will have user data eg latitude etc. although...... This can be passed to the front end easily!
+    context = {'d':d}
+    return render(request, 'posts/month.html', context)

@@ -3,8 +3,17 @@
 
 {% block content %}
 
+<div class="row justify-content-between">
+    <div class="col-3">
+        {% include 'posts/partials/daily_time.html' %}
+    </div>
+    <div class="col-9">
+        <img src="https://theistanbulinsider.com/wp-content/uploads/2020/03/blue-mosque-aerial.jpg" class="overflow-hidden">
+        <p>Photo by <a href="https://unsplash.com/@sylwiabartyzel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sylwia Bartyzel</a> on <a href="https://unsplash.com/backgrounds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
+    </div>
+</div>
 
-{% include 'posts/partials/daily_time.html' %}
+
 <!-- ***************************************************************************** 
     This is the slider section on the page. Populate with posts from the posts app
     Images are best 1000x667 or ***

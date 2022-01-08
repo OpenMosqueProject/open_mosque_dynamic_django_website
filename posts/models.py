@@ -15,3 +15,6 @@ class Post(models.Model):
             placeholder_image=OnStoragePlaceholderImage(
                 path='images/default_image.jpg'
         ))
+
+class CentreProfile(models.Model):
+    pass

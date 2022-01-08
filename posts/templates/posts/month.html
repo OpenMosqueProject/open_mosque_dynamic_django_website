@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="{% static 'images/gsm_logo.png' %}" alt="" width="80" height="80">
+    <h1 class="display-5 fw-bold">OMS Monthly Prayer Times</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Prayer times for the month</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Choose Month
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Jan</a></li>
+              <li><a class="dropdown-item" href="#">Feb</a></li>
+              <li><a class="dropdown-item" href="#">Mar</a></li>
+            </ul>
+          </div>
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Select</button>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Fajr</th>
+        <th scope="col">Dhuhr</th>
+        <th scope="col">Asr</th>
+        <th scope="col">Maghrib</th>
+        <th scope="col">Isha</th>        
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for row in d %}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{row["date"]}}</td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}
