@@ -1,5 +1,11 @@
-# open_mosque_website
-An open source solution for mosques complete with a homepage, about page and customisable prayer times
+# open_mosque_website 🕋
+The Open Mosque Project is about developing a website and web services for all mosques for near enough free. The idea is that they would only need hosting and 1 person to help set it up.
+The website will provide mosques auto-generated prayer times (with adjustable jamaa times) and pages for other services they may offer. 
+
+The idea is to keep this open source so that others can take and build on it. 
+It would be great to grow an open community with ideas and know-how to help develop this for all mosques in the world.
+
+The project is being developed using a Django backend. We are still in early stages and needs people with the skills to help make this project a reality insha'Allah 🤲.
 
 
 ## 🔧 Setup 🔧

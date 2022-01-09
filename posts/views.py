@@ -1,12 +1,10 @@
 from django.shortcuts import render
 import datetime
-#from datetime import datetime, timedelta
 import requests
 from .models import Post
-# Create your views here.
 
 
-##### Need to load these from a global profile
+##### TODO Need to load these from a global profile
 city = 'London'
 country = 'GB'
 method = 2
