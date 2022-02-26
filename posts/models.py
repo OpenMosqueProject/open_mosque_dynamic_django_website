@@ -16,5 +16,9 @@ class Post(models.Model):
                 path='images/default_image.jpg'
         ))
 
+    def __str__(self):
+        return self.title
+
+
 class CentreProfile(models.Model):
     pass

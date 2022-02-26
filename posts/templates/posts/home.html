@@ -9,7 +9,7 @@
     </div>
     <div class="col-9">
         <img src="https://theistanbulinsider.com/wp-content/uploads/2020/03/blue-mosque-aerial.jpg" class="overflow-hidden">
-        <p>Photo by <a href="https://unsplash.com/@sylwiabartyzel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sylwia Bartyzel</a> on <a href="https://unsplash.com/backgrounds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
+        <small><p>Photo by <a href="https://unsplash.com/@sylwiabartyzel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sylwia Bartyzel</a> on <a href="https://unsplash.com/backgrounds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p></small>
     </div>
 </div>
 
@@ -21,6 +21,7 @@
     ***************************************************************************** -->
 <section class="ftco-section">
     <div class="container">
+        <h1>News/Events</h1>
         <div class="row">
             <div class="col-md-12">
                 <div class="featured-carousel owl-carousel">
@@ -32,9 +33,9 @@
                             <a href="#" class="block-20 d-flex align-items-start"
                                 style="background-image: url('{{ post.image.url }}');">
                                 <div class="meta-date text-center p-2">
-                                    <span class="day">26</span>
-                                    <span class="mos">Nov.</span>
-                                    <span class="yr">2019</span>
+                                    <span class="day">{{post.published_date|date:"d"}}</span>
+                                    <span class="mos">{{post.published_date|date:"M"}}</span>
+                                    <span class="yr">{{post.published_date|date:"Y"}}</span>
                                 </div>
                             </a>
                             <div class="text border border-top-0 p-4">

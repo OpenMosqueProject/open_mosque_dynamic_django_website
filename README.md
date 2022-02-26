@@ -1,4 +1,4 @@
-# open_mosque_website 🕋
+# 🕋 open_mosque_dynamic_website 🕋
 The Open Mosque Project is about developing a website and web services for all mosques for near enough free. The idea is that they would only need hosting and 1 person to help set it up.
 The website will provide mosques auto-generated prayer times (with adjustable jamaa times) and pages for other services they may offer. 
 
@@ -18,6 +18,7 @@ Before trying to run the server
 - create a variable like `SECRET_KEY='replace_this_part_with_secret_key'` in the `.env` file
 - generate a secret key from here https://miniwebtool.com/django-secret-key-generator/
 - between Git Pulls do not forget to run `pip install -r requirements.txt`
+- run `python manage.py makemigrations` and `python manage.py migrate`
 
 - *if* new dependencies have been added run `pip freeze > requirements.txt`
 
