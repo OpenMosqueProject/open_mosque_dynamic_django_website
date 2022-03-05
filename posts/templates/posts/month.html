@@ -5,7 +5,7 @@
 
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="{% static 'images/gsm_logo.png' %}" alt="" width="80" height="80">
-    <h1 class="display-5 fw-bold">OMS Monthly Prayer Times</h1>
+    <h1 class="display-5 fw-bold">{{masjid_name}} Monthly Prayer Times</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Prayer times for the month</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -26,7 +26,7 @@
   </div>
 
 
-  <table class="table">
+  <!-- <table class="table">
     <thead>
       <tr>
         <th scope="col">Day</th>
@@ -42,10 +42,99 @@
         {% for row in d %}
       <tr>
         <th scope="row">1</th>
-        <td>{{row["date"]}}</td>
+        <td>{{row}}</td>
         
       </tr>
       {% endfor %}
     </tbody>
-  </table>
-{% endblock content %}
+  </table> -->
+
+  <div id="mytable">
+
+  </div>
+
+  <script>
+    var obj = JSON.parse('{{ d | escapejs }}');
+    // console.log(obj[0]["fajr"]); // TODO need to explore slicing output to remove (GMT from table)
+    var mytable = '<table class="table text-center"><thead class=" thead-light"><tr><th scope="col">'+ " " +'</th>';
+    mytable += '<th scope="col" colspan="2">Fajr</th>'; 
+    mytable += '<th scope="col">Sunrise</th>';
+    mytable += '<th scope="col" colspan="2">Dhuhr</th>';
+    mytable += '<th scope="col" colspan="2">Asr</th>'; 
+    mytable += '<th scope="col" colspan="2">Maghrib</th>';
+    mytable += '<th scope="col" colspan="2">Isha</th></tr></thead><tbody>'; 
+
+    var days_in_the_month = Object.keys(obj).length;
+    // console.log(days_in_the_month); // checking if the number of the days of month is correct.
+    var today = new Date(); // Using JS to pull today's actual date
+    var today_formatted =today.getDate().toString();
+    var today_date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear(); // today as D-M-YYYY
+    if (today_formatted.length<2){today_formatted='0'+today_formatted} // adds 0 to day if length <2
+    var month_formatted = (today.getMonth()+1).toString();
+    if (month_formatted.length<2){month_formatted='0'+month_formatted} // adds 0 to month if length <2
+    var today_date_formatted = today_formatted+'-'+month_formatted+'-'+today.getFullYear(); // today as DD-MM-YYYY
+    
+    var tmonth = new Array(12);
+    tmonth[0] = "January";
+    tmonth[1] = "February";
+    tmonth[2] = "March";
+    tmonth[3] = "April";
+    tmonth[4] = "May";
+    tmonth[5] = "June";
+    tmonth[6] = "July";
+    tmonth[7] = "August";
+    tmonth[8] = "September";
+    tmonth[9] = "October";
+    tmonth[10] = "November";
+    tmonth[11] = "December";
+
+    var weekday = new Array(7);
+    weekday[0] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+    var month = tmonth[today.getMonth()];
+    var bugun = weekday[today.getDay()];
+
+    let newday = '';
+    
+    for(var i = 0; i < days_in_the_month; i++) {
+      day = (i+1).toString();
+      if (day.length<2){day='0'+day}
+      
+      var gun = day.toString()+'-'+month_formatted.toString()+'-'+today.getFullYear(); // each day on calendar
+      
+      var fajr = obj[i]["fajr"];
+      var fajr_j = obj['fajr_jamat'];
+      var sun = obj[i]['sunrise'];
+      var dhu = obj[i]['dhuhr'];
+      var dhu_j = obj['dhuhr_jamat'];
+      var asr = obj[i]['asr'];
+      var asr_j = obj[i]['asr_jamat'];
+      var mag = obj[i]['maghrib'];
+      var mag_j = obj['magrib_jamat'];
+      var ish = obj[i]['isha'];
+      var ish_j = obj['isha_jamat'];
+      //console.log(today_date)
+      var each_day = new Date(gun)
+      var today_weekday = weekday[each_day.getDay()];
+      
+      if (obj[i]["date"]==today_date_formatted){
+        newday = "<tr class='table-active'><td>"+(day)+"</td><td>"+fajr+"</td><td>"+fajr_j+"</td><td>"+sun+"</td><td>"+dhu+"</td><td>"+dhu_j+"</td><td>"+asr+"</td><td>"+asr_j+"</td><td>"+mag+"</td><td>"+mag_j+"</td><td>"+ish+"</td><td>"+ish_j+"</td></tr>";
+      }else if (obj[i]["weekday"]=='Friday') {
+        newday = "<tr class='table-warning'><td>"+(day)+"</td><td>"+fajr+"</td><td>"+fajr_j+"</td><td>"+sun+"</td><td>"+dhu+"</td><td>"+dhu_j+"</td><td>"+asr+"</td><td>"+asr_j+"</td><td>"+mag+"</td><td>"+mag_j+"</td><td>"+ish+"</td><td>"+ish_j+"</td></tr>";
+      }else{
+      newday = "<tr><td>"+(day)+"</td><td>"+fajr+"</td><td>"+fajr_j+"</td><td>"+sun+"</td><td>"+dhu+"</td><td>"+dhu_j+"</td><td>"+asr+"</td><td>"+asr_j+"</td><td>"+mag+"</td><td>"+mag_j+"</td><td>"+ish+"</td><td>"+ish_j+"</td></tr>";
+      }
+      mytable += newday;
+
+    }
+  mytable += "</tbody></table>";
+  document.getElementById('mytable').innerHTML = mytable;
+
+  </script>
+
+  {% endblock content %}
