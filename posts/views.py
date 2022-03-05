@@ -1,15 +1,19 @@
 from django.shortcuts import render
-import datetime
-import requests
+from django.utils.safestring import SafeString
+
+import requests, json, datetime
 from .models import Post
 
+from .models import CentreProfile
+masjid = CentreProfile.objects.get()
 
-##### TODO Need to load these from a global profile
-city = 'London'
-country = 'GB'
-method = 2
-longitude = 0.219730
-latitude = 51.443909
+##### Variables loaded from centre profile here #####
+masjid_name = masjid.masjid_name 
+city = masjid.city 
+country = masjid.country 
+method = masjid.method
+longitude = masjid.longitude
+latitude = masjid.latitude
 current_time = datetime.datetime.now()
 month = current_time.month
 year = current_time.year
@@ -53,10 +57,26 @@ def month_view(request):
     month_api = requests.get(f'http://api.aladhan.com/v1/calendar?latitude={latitude}&longitude={longitude}&country={country}&method={method}&month={month}&year={year}')
     data = month_api.json()
     d = data['data']
+    month_data = []
+    for row in d:
+        date = row["date"]["gregorian"]["date"]
+        weekday =row["date"]["gregorian"]["weekday"]["en"]
+        mon = row["date"]["gregorian"]["month"]["en"]
+        fajr = row["timings"]["Fajr"][0:5]
+        sunrise = row["timings"]["Sunrise"][0:5]
+        dhuhr = row["timings"]["Dhuhr"][0:5]
+        asr = row["timings"]["Asr"][0:5]
+        maghrib = row["timings"]["Maghrib"][0:5]
+        isha = row["timings"]["Isha"][0:5]
+        day_no = row["date"]["gregorian"]["day"]
+        day_ab = row["date"]["gregorian"]["weekday"]
+        month_data.append({'fajr':fajr, 'sunrise':sunrise, 'dhuhr':dhuhr, 'asr':asr,'maghrib':maghrib, 'isha':isha,'month':mon, 'date':date, 'weekday':weekday})
+    #print(month_data)
+    #print(d)
     #####
     # The data for the table needs to be parsed in HTML. 
     # TODO - see if there is a built in HTMX module for parsing the JSON data from the backend.
     # The backend will be continued to source the data as opposed to making the API call from the front end
     # because the backend will have user data eg latitude etc. although...... This can be passed to the front end easily!
-    context = {'d':d}
+    context = {'d':json.dumps(month_data), 'masjid_name':masjid_name}
     return render(request, 'posts/month.html', context)

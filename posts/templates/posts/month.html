@@ -25,33 +25,7 @@
     </div>
   </div>
 
-
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Day</th>
-        <th scope="col">Fajr</th>
-        <th scope="col">Dhuhr</th>
-        <th scope="col">Asr</th>
-        <th scope="col">Maghrib</th>
-        <th scope="col">Isha</th>        
-      </tr>
-    </thead>
-    
-    <tbody>
-        {% for row in d %}
-      <tr>
-        <th scope="row">1</th>
-        <td>{{row}}</td>
-        
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table> -->
-
-  <div id="mytable">
-
-  </div>
+  <div id="mytable"></div>
 
   <script>
     var obj = JSON.parse('{{ d | escapejs }}');

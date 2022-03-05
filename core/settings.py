@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # for site profile settings
+    'solo',
+
     # imported apps
     'versatileimagefield',
 
