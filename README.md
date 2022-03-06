@@ -15,7 +15,7 @@ Before trying to run the server
 ### Django
 
 - add a file named `.env` in the root folder
-- create a variable like `SECRET_KEY='replace_this_part_with_secret_key'` in the `.env` file
+- create a variable called `SECRET_KEY='replace_this_part_with_secret_key'` in the `.env` file
 - generate a secret key from here https://miniwebtool.com/django-secret-key-generator/
 - between Git Pulls do not forget to run `pip install -r requirements.txt`
 - run `python manage.py makemigrations` and `python manage.py migrate`

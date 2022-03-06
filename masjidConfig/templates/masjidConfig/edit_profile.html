@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content">
+  <h1 class="">{{masjid_name}}'s profile</h1>
+</div>
+
+<div class="container">
+
+    <div class="column is-half">
+      <!-- Profile edit form -->
+      <article class="message">
+        <div class="message-header">
+          <p>Edit profile</p>
+        </div>
+        <div class="message-body">
+          <form class="" action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="field">
+              <p class="control">
+                <!-- <input class="input" type="email" placeholder="Email"> -->
+                {{ user_form.as_p }}
+              </p>
+            </div>
+            <input type="submit" value="Save Profile" class="button is-primary">
+          </form>
+          
+        </div>
+      </article>
+  
+    </div>
+  
+    <!-- Ad Space -->
+    <div class="column is-quarter">
+      <article class="message">
+        <div class="message-header">
+          <p>A message from our sponsers</p>
+        </div>
+        <div class="message-body">
+          <p>add here</p>        
+        </div>
+      </article>
+    </div>
+  </div>
+  
+  
+  </div>
+  
+</div>
+
+
+
+{% endblock %}

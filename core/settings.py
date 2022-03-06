@@ -36,9 +36,11 @@ INSTALLED_APPS = [
 
     # imported apps
     'versatileimagefield',
+    'fontawesomefree',
 
     # my apps
     'posts',
+    'masjidConfig',
 ]
 
 MIDDLEWARE = [

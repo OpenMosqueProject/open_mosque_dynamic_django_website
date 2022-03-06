@@ -4,7 +4,7 @@ from django.utils.safestring import SafeString
 import requests, json, datetime
 from .models import Post
 
-from .models import CentreProfile
+from masjidConfig.models import CentreProfile
 masjid = CentreProfile.objects.get()
 
 ##### Variables loaded from centre profile here #####
@@ -26,6 +26,7 @@ isha_jamaah_minutes = 15
 
 
 def home(request):
+    masjid = CentreProfile.objects.get()
     posts = Post.objects.all()
 
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
@@ -48,7 +49,7 @@ def home(request):
     isha_j= f"{ish.hour}:{ish.minute}"
     today = d['data']['date']['readable']
     hijri = f"{d['data']['date']['hijri']['day']}-{d['data']['date']['hijri']['month']['en']}-{d['data']['date']['hijri']['year']}"
-    context = {'posts':posts, 'fajr_j':fajr_j, 'dhuhr_j':dhuhr_j, 'asr_j':asr_j, 'maghrib_j':maghrib_j, 'isha_j':isha_j,
+    context = {'masjid':masjid, 'posts':posts, 'fajr_j':fajr_j, 'dhuhr_j':dhuhr_j, 'asr_j':asr_j, 'maghrib_j':maghrib_j, 'isha_j':isha_j,
         'fajr':fajr,'sunrise':sunrise, 'dhuhr':dhuhr, 'asr':asr, 'maghrib':maghrib, 'isha':isha, 'today':today, 'hijri':hijri}
     
     return render(request, 'posts/home.html', context)
