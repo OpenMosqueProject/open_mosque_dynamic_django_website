@@ -26,7 +26,6 @@ isha_jamaah_minutes = 15
 
 
 def home(request):
-    masjid = CentreProfile.objects.get()
     posts = Post.objects.all()
 
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
@@ -79,5 +78,5 @@ def month_view(request):
     # TODO - see if there is a built in HTMX module for parsing the JSON data from the backend.
     # The backend will be continued to source the data as opposed to making the API call from the front end
     # because the backend will have user data eg latitude etc. although...... This can be passed to the front end easily!
-    context = {'d':json.dumps(month_data), 'masjid_name':masjid_name}
+    context = {'d':json.dumps(month_data), 'masjid':masjid}
     return render(request, 'posts/month.html', context)

@@ -23,6 +23,6 @@ def edit_profile(request):
         user_form = MasjidEditForm(data=request.POST or None, instance=masjid)
     context = {
         'user_form':user_form,
-        'masjid_name':masjid_name,
+        'masjid':masjid,
         }
     return render(request, 'masjidConfig/edit_profile.html', context)
