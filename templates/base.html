@@ -1,4 +1,6 @@
 {% load static %}
+{% load solo_tags %}
+{% get_solo 'masjidConfig.CentreProfile' as masjid %}
 <html>
     <head>
         <!-- CSS only -->
@@ -10,6 +12,16 @@
         <link rel="stylesheet" href="{% static 'css/daily_prayer.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         
+        <style>
+
+          /* :root {
+            --hour: {{hour}}
+            --minute: {{minute}}
+            --second: {{second}}
+          } */
+        
+        </style>
+  
     </head>
 
 
@@ -22,7 +34,7 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <a class="navbar-brand" href="{% url 'posts:home' %}">
-                  <img src="{% static 'images/gsm_logo.png' %}" alt="" width="50" height="50">
+                  <img src="{{masjid.masjidLogo.url}}" alt="" width="50" height="50">
                 </a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">

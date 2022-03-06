@@ -8,8 +8,7 @@ from .models import *
 # Create your views here.
 
 masjid = CentreProfile.objects.get()
-masjid_name = masjid.masjid_name
-
+#masjid = CentreProfile.get_solo()
 
 @login_required
 def edit_profile(request):  

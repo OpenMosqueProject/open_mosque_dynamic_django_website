@@ -5,6 +5,7 @@ import requests, json, datetime
 from .models import Post
 
 from masjidConfig.models import CentreProfile
+
 masjid = CentreProfile.objects.get()
 
 ##### Variables loaded from centre profile here #####
@@ -78,5 +79,5 @@ def month_view(request):
     # TODO - see if there is a built in HTMX module for parsing the JSON data from the backend.
     # The backend will be continued to source the data as opposed to making the API call from the front end
     # because the backend will have user data eg latitude etc. although...... This can be passed to the front end easily!
-    context = {'d':json.dumps(month_data), 'masjid':masjid}
+    context = {'d':json.dumps(month_data)}
     return render(request, 'posts/month.html', context)
