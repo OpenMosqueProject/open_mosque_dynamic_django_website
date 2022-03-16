@@ -18,13 +18,29 @@ latitude = masjid.latitude
 current_time = datetime.datetime.now()
 month = current_time.month
 year = current_time.year
-fajr_jamaah_minutes = 15
-dhuhr_jamaah_minutes = 15
-asr_jamaah_minutes = 15
-maghrib_jamaah_minutes = 15
-isha_jamaah_minutes = 15
+fajr_jam_min = masjid.fajr_jamaah_minutes
+dh_jam_min = masjid.dhuhr_jamaah_minutes
+asr_jamaah_minutes = masjid.asr_jamaah_minutes
+maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
+isha_jamaah_minutes = masjid.isha_jamaah_minutes
 ###############################################
 
+
+def ceil_dt(dt, delta):
+    return dt + (datetime.min - dt) % delta
+
+def jamaah_calculator(azaanTime, minutesAfter):
+
+    if minutesAfter == "5":
+        return datetime.datetime.strptime(azaanTime, '%H:%M') + datetime.timedelta(minutes = 5)
+    elif minutesAfter == "10":
+        return datetime.datetime.strptime(azaanTime, '%H:%M') + datetime.timedelta(minutes = 10)
+    elif minutesAfter == "15":
+        return datetime.datetime.strptime(azaanTime, '%H:%M') + datetime.timedelta(minutes = 15)
+    elif minutesAfter == "round_to_fifteen":
+        return ceil_dt(datetime.datetime.strptime(azaanTime, '%H:%M'), datetime.timedelta(minutes=15))
+    else:
+        return ceil_dt(datetime.datetime.strptime(azaanTime, '%H:%M'), datetime.timedelta(minutes=30))
 
 def home(request):
     posts = Post.objects.all()
@@ -32,20 +48,20 @@ def home(request):
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
     d = api_data.json()
     fajr = d['data']['timings']['Fajr']
-    fj = datetime.datetime.strptime(fajr, '%H:%M') + datetime.timedelta(minutes = fajr_jamaah_minutes)
+    fj = jamaah_calculator(fajr, fajr_jam_min)
     fajr_j = f"{fj.hour}:{fj.minute}"
     sunrise = d['data']['timings']['Sunrise']
     dhuhr = d['data']['timings']['Dhuhr']
-    dh = datetime.datetime.strptime(dhuhr, '%H:%M') + datetime.timedelta(minutes = dhuhr_jamaah_minutes)
+    dh = jamaah_calculator(dhuhr, dh_jam_min)
     dhuhr_j = f"{dh.hour}:{dh.minute}"
     asr = d['data']['timings']['Asr']
-    asrj = datetime.datetime.strptime(asr, '%H:%M') + datetime.timedelta(minutes = asr_jamaah_minutes)
+    asrj = jamaah_calculator(asr, asr_jamaah_minutes)
     asr_j= f"{asrj.hour}:{asrj.minute}"
     maghrib = d['data']['timings']['Maghrib']
-    mg = datetime.datetime.strptime(maghrib, '%H:%M') + datetime.timedelta(minutes = maghrib_jamaah_minutes)
+    mg = jamaah_calculator(maghrib, maghrib_jamaah_minutes)
     maghrib_j =  f"{mg.hour}:{mg.minute}"
     isha = d['data']['timings']['Isha']
-    ish = datetime.datetime.strptime(dhuhr, '%H:%M') + datetime.timedelta(minutes = isha_jamaah_minutes)
+    ish = jamaah_calculator(isha, isha_jamaah_minutes)
     isha_j= f"{ish.hour}:{ish.minute}"
     today = d['data']['date']['readable']
     hijri = f"{d['data']['date']['hijri']['day']}-{d['data']['date']['hijri']['month']['en']}-{d['data']['date']['hijri']['year']}"
@@ -65,13 +81,23 @@ def month_view(request):
         mon = row["date"]["gregorian"]["month"]["en"]
         fajr = row["timings"]["Fajr"][0:5]
         sunrise = row["timings"]["Sunrise"][0:5]
+        fj = jamaah_calculator(fajr, fajr_jam_min)
+        fajr_j = f"{fj.hour}:{fj.minute}"
         dhuhr = row["timings"]["Dhuhr"][0:5]
+        dh = jamaah_calculator(dhuhr, dh_jam_min)
+        dhuhr_j = f"{dh.hour}:{dh.minute}"
         asr = row["timings"]["Asr"][0:5]
+        asrj = jamaah_calculator(asr, asr_jamaah_minutes)
+        asr_j= f"{asrj.hour}:{asrj.minute}"
         maghrib = row["timings"]["Maghrib"][0:5]
+        mg = jamaah_calculator(maghrib, maghrib_jamaah_minutes)
+        maghrib_j =  f"{mg.hour}:{mg.minute}"
         isha = row["timings"]["Isha"][0:5]
+        ish = jamaah_calculator(isha, isha_jamaah_minutes)
+        isha_j= f"{ish.hour}:{ish.minute}"
         day_no = row["date"]["gregorian"]["day"]
         day_ab = row["date"]["gregorian"]["weekday"]
-        month_data.append({'fajr':fajr, 'sunrise':sunrise, 'dhuhr':dhuhr, 'asr':asr,'maghrib':maghrib, 'isha':isha,'month':mon, 'date':date, 'weekday':weekday})
+        month_data.append({'fajr':fajr,'fajr_j':fajr_j,'sunrise':sunrise, 'dhuhr':dhuhr, 'dhuhr_j':dhuhr_j,'asr':asr,'asr_j':asr_j,'maghrib':maghrib,'maghrib_j':maghrib_j, 'isha':isha,'isha_j':isha_j,'month':mon, 'date':date, 'weekday':weekday,'day_no':day_no, 'day_ab':day_ab})
     #print(month_data)
     #print(d)
     #####

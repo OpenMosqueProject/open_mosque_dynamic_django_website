@@ -82,16 +82,16 @@
       var gun = day.toString()+'-'+month_formatted.toString()+'-'+today.getFullYear(); // each day on calendar
       
       var fajr = obj[i]["fajr"];
-      var fajr_j = obj['fajr_jamat'];
+      var fajr_j = obj[i]['fajr_j'];
       var sun = obj[i]['sunrise'];
       var dhu = obj[i]['dhuhr'];
-      var dhu_j = obj['dhuhr_jamat'];
+      var dhu_j = obj[i]['dhuhr_j'];
       var asr = obj[i]['asr'];
-      var asr_j = obj[i]['asr_jamat'];
+      var asr_j = obj[i]['asr_j'];
       var mag = obj[i]['maghrib'];
-      var mag_j = obj['magrib_jamat'];
+      var mag_j = obj[i]['maghrib_j'];
       var ish = obj[i]['isha'];
-      var ish_j = obj['isha_jamat'];
+      var ish_j = obj[i]['isha_j'];
       //console.log(today_date)
       var each_day = new Date(gun)
       var today_weekday = weekday[each_day.getDay()];

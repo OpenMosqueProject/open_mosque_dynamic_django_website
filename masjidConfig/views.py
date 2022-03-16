@@ -12,6 +12,7 @@ masjid = CentreProfile.objects.get()
 
 @login_required
 def edit_profile(request):  
+    
     if request.method == 'POST':
         user_form = MasjidEditForm(data=request.POST or None, instance=masjid)
         
