@@ -27,7 +27,7 @@ isha_jamaah_minutes = masjid.isha_jamaah_minutes
 
 
 def ceil_dt(dt, delta):
-    return dt + (datetime.min - dt) % delta
+    return dt + (datetime.datetime.min - dt) % delta
 
 def jamaah_calculator(azaanTime, minutesAfter):
 

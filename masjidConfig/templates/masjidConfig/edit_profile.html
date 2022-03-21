@@ -16,16 +16,10 @@
         
         <div class="message-body">
 
-          <label class="form-check-label">
-            Click here to enter site into maintenance mode
-          </label>
-          <p class="control">
-            {{user_form.maintenance_mode}}
-          </p>
-
+          
           <form class="" action="." method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
+              
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Profile Information</button>
@@ -43,6 +37,16 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <br>
               <div class="container">
+
+                <div class="field">
+                  <label class="form-check-label">
+                    Click here to enter site into maintenance mode
+                  </label>
+                  <p class="control">
+                    {{user_form.maintenance_mode}}
+                  </p>
+                </div>
+
                 <div class="field">
                   <label class="form-label">Masjid Name</label>
                   <p class="control">
@@ -60,6 +64,42 @@
                   <label class="form-label">About Masjid</label>
                   <p class="control">
                     {{ user_form.about }}
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="form-label">First Line of Address</label>
+                  <p class="control">
+                    {{ user_form.address1 }}
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="form-label">Town</label>
+                  <p class="control">
+                    {{ user_form.town }}
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="form-label">City</label>
+                  <p class="control">
+                    {{ user_form.city }}
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="form-label">Country</label>
+                  <p class="control">
+                    {{ user_form.country }}
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="form-label">Postal/Zip Code</label>
+                  <p class="control">
+                    {{ user_form.postcode }}
+                  </p>
+                </div>
+                <div class="field">
+                  <label class="form-label">what 3 words</label>
+                  <p class="control">
+                    {{ user_form.what3words }}
                   </p>
                 </div>
                 <div class="field">
@@ -122,18 +162,7 @@
               </div>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div class="field">
-                <label class="form-label">City</label>
-                <p class="control">
-                  {{ user_form.city }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Country</label>
-                <p class="control">
-                  {{ user_form.country }}
-                </p>
-              </div>
+              
               <div class="field">
                 <label class="form-label">Prayer Calculation Method</label>
                 <p class="control">
@@ -213,7 +242,6 @@
             </div>
           </div>
            
-            
             <input type="submit" value="Save Profile" class="button is-primary">
           </form>
           

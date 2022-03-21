@@ -20,6 +20,7 @@ class MasjidEditForm(forms.ModelForm):
     maintenance_mode = models.BooleanField(default=False)
     masjid_name = models.CharField(max_length=255, default='Open Mosque Project')
     masjidLogo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
+    
     city = models.CharField(max_length=255, default='London')
     country = models.CharField(max_length=255, default='GB')    
     method = models.IntegerField(max_length=2, choices=PRAYER_CALC_CHOICES, default=3)

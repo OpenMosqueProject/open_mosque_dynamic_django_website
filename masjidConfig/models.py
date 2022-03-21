@@ -99,6 +99,8 @@ class CentreProfile(SingletonModel):
     masjid_name = models.CharField(max_length=255, default='Open Mosque Project')
     masjidLogo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
     about = models.TextField(max_length=2000, blank=True)
+    address1 = models.CharField(max_length=255, blank=True)
+    town = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, default='London')
     country = models.CharField(max_length=255, default='GB')    
     method = models.IntegerField(choices=PRAYER_CALC_CHOICES, default=3)
@@ -122,9 +124,10 @@ class CentreProfile(SingletonModel):
     landline = models.CharField(max_length=255, blank=True)
     mobile = models.CharField(max_length=255, blank=True)
     email = models.CharField(max_length=255, blank=True)
+    what3words = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return "Site Configuration"
+        return f"{self.masjid_name} Site Configuration"
 
     class Meta:
         verbose_name = "Site Configuration"
