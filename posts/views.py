@@ -48,6 +48,10 @@ def jamaah_calculator(azaanTime, minutesAfter):
     else:
         return ceil_dt(datetime.datetime.strptime(azaanTime, '%H:%M'), datetime.timedelta(minutes=30))
 
+# NOTE:
+# Ternary statements below solves minutes being displayed as single digit eg
+# 17:05 displaying as 17:5 or 20:00 displaying as 20:0
+
 def home(request):
     posts = Post.objects.all()
 
@@ -55,20 +59,25 @@ def home(request):
     d = api_data.json()
     fajr = d['data']['timings']['Fajr']
     fj = jamaah_calculator(fajr, fajr_jam_min)
-    fajr_j = f"{fj.hour}:{fj.minute}"
+    fjmins = f"{fj.minute}" if len(str(fj.minute))==2 else f"0{fj.minute}"
+    fajr_j = f"{fj.hour}:{fjmins}"
     sunrise = d['data']['timings']['Sunrise']
     dhuhr = d['data']['timings']['Dhuhr']
     dh = jamaah_calculator(dhuhr, dh_jam_min)
-    dhuhr_j = f"{dh.hour}:{dh.minute}"
+    dhmins = f"{dh.minute}" if len(str(dh.minute))==2 else f"0{dh.minute}"
+    dhuhr_j = f"{dh.hour}:{dhmins}"
     asr = d['data']['timings']['Asr']
     asrj = jamaah_calculator(asr, asr_jamaah_minutes)
-    asr_j= f"{asrj.hour}:{asrj.minute}"
+    asmins = f"{asrj.minute}" if len(str(asrj.minute))==2 else f"0{asrj.minute}"
+    asr_j= f"{asrj.hour}:{asmins}"
     maghrib = d['data']['timings']['Maghrib']
     mg = jamaah_calculator(maghrib, maghrib_jamaah_minutes)
-    maghrib_j =  f"{mg.hour}:{mg.minute}"
+    mgmins = f"{mg.minute}" if len(str(mg.minute))==2 else f"0{mg.minute}"
+    maghrib_j =  f"{mg.hour}:{mgmins}"
     isha = d['data']['timings']['Isha']
     ish = jamaah_calculator(isha, isha_jamaah_minutes)
-    isha_j= f"{ish.hour}:{ish.minute}"
+    ismins = f"{ish.minute}" if len(str(ish.minute))==2 else f"0{ish.minute}"
+    isha_j= f"{ish.hour}:{ismins}"
     today = d['data']['date']['readable']
     hijri = f"{d['data']['date']['hijri']['day']}-{d['data']['date']['hijri']['month']['en']}-{d['data']['date']['hijri']['year']}"
     context = {'masjid':masjid, 'posts':posts, 'fajr_j':fajr_j, 'dhuhr_j':dhuhr_j, 'asr_j':asr_j, 'maghrib_j':maghrib_j, 'isha_j':isha_j,
@@ -88,19 +97,24 @@ def month_view(request):
         fajr = row["timings"]["Fajr"][0:5]
         sunrise = row["timings"]["Sunrise"][0:5]
         fj = jamaah_calculator(fajr, fajr_jam_min)
-        fajr_j = f"{fj.hour}:{fj.minute}"
+        fjmins = f"{fj.minute}" if len(str(fj.minute))==2 else f"0{fj.minute}"
+        fajr_j = f"{fj.hour}:{fjmins}"
         dhuhr = row["timings"]["Dhuhr"][0:5]
         dh = jamaah_calculator(dhuhr, dh_jam_min)
-        dhuhr_j = f"{dh.hour}:{dh.minute}"
+        dhmins = f"{dh.minute}" if len(str(dh.minute))==2 else f"0{dh.minute}"
+        dhuhr_j = f"{dh.hour}:{dhmins}"
         asr = row["timings"]["Asr"][0:5]
         asrj = jamaah_calculator(asr, asr_jamaah_minutes)
-        asr_j= f"{asrj.hour}:{asrj.minute}"
+        asmins = f"{asrj.minute}" if len(str(asrj.minute))==2 else f"0{asrj.minute}"
+        asr_j= f"{asrj.hour}:{asmins}"
         maghrib = row["timings"]["Maghrib"][0:5]
         mg = jamaah_calculator(maghrib, maghrib_jamaah_minutes)
-        maghrib_j =  f"{mg.hour}:{mg.minute}"
+        mgmins = f"{mg.minute}" if len(str(mg.minute))==2 else f"0{mg.minute}"
+        maghrib_j =  f"{mg.hour}:{mgmins}"
         isha = row["timings"]["Isha"][0:5]
         ish = jamaah_calculator(isha, isha_jamaah_minutes)
-        isha_j= f"{ish.hour}:{ish.minute}"
+        ismins = f"{ish.minute}" if len(str(ish.minute))==2 else f"0{ish.minute}"
+        isha_j= f"{ish.hour}:{ismins}"
         day_no = row["date"]["gregorian"]["day"]
         day_ab = row["date"]["gregorian"]["weekday"]
         month_data.append({'fajr':fajr,'fajr_j':fajr_j,'sunrise':sunrise, 'dhuhr':dhuhr, 'dhuhr_j':dhuhr_j,'asr':asr,'asr_j':asr_j,'maghrib':maghrib,'maghrib_j':maghrib_j, 'isha':isha,'isha_j':isha_j,'month':mon, 'date':date, 'weekday':weekday,'day_no':day_no, 'day_ab':day_ab})
