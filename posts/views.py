@@ -25,10 +25,16 @@ maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
 isha_jamaah_minutes = masjid.isha_jamaah_minutes
 ###############################################
 
-
+'''This function is used to round the time UP to the nearest 5,10,15
+For more info, the idea is taken from 
+https://stackoverflow.com/questions/13071384/ceil-a-datetime-to-next-quarter-of-an-hour
+'''
 def ceil_dt(dt, delta):
     return dt + (datetime.datetime.min - dt) % delta
 
+''' The Jamaah Calculator function takes the desired "minutes after" from the masjid 
+profile and adjusts the jamaah times accordingly by using Pythons datetime library.
+'''
 def jamaah_calculator(azaanTime, minutesAfter):
 
     if minutesAfter == "5":

@@ -22,6 +22,18 @@ Before trying to run the server
 
 - *if* new dependencies have been added run `pip freeze > requirements.txt`
 
+### *Current bug* 🤷‍♂️
+There is an issue with django-solo which is what we are using to save the website profile settings.
+This causes 2 issues. Before you can run the program for the first time, migrate to the DB or create a superuser be sure to:
+
+- on line 3 of the base.html comment out --> {% get_solo 'masjidConfig.CentreProfile' as masjid %}
+- on line 10 of masjidConfig views.py comment out --> masjid = CentreProfile.objects.get()
+- on line 9 of posts views.py comment out --> masjid = CentreProfile.objects.get() 
+- lastly again in posts views.py comment out the variables on lines 12-25
+
+Unfortunately, this issue crops up again if you are making changes to the masjidConfig model so do the above again
+
+
 ### Other info
 There are 2 great APIs to that I have used in projects to generate prayer times. Most mosques in London use https://www.londonprayertimes.com/api/. You may wish to consider that if you are from the UK.
 For this project I have used the excellent https://aladhan.com/prayer-times-api. No API Key needed.
