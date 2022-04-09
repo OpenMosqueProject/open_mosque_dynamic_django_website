@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="px-4 py-5 my-5 text-center">
@@ -19,230 +19,281 @@
           
           <form class="" action="." method="post" enctype="multipart/form-data">
             {% csrf_token %}
-              
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Profile Information</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Prayer Calculation Methods</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Site Colours</button>
-            </li>
-          </ul>
-
-                                 
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <br>
-              <div class="container">
-
-                <div class="field">
-                  <label class="form-check-label">
-                    Click here to enter site into maintenance mode
-                  </label>
-                  <p class="control">
-                    {{user_form.maintenance_mode}}
-                  </p>
+            <!-- <div class="field">
+              <label class="form-check-label">
+                Click here to enter site into maintenance mode
+              </label>
+              <p class="control">
+                {{form.maintenance_mode|as_crispy_field}}
+            </p>
+            </div> -->
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Profile Information
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <div class="field">
+                      <p class="control">
+                        {{ form.masjid_name |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <img src="{{masjid.masjidLogo.url}}" width="40px" alt="">
+                      <p class="control">
+                        {{ form.masjidLogo |as_crispy_field}}
+                      </p>
+                    </div>
+                    <h2>About Masjid</h2>
+                    <div class="field">
+                      <!-- <label class="form-label">About Masjid</label> -->
+                      <p class="control">
+                        {{ form.about |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <label class="form-label">First Line of Address</label>
+                      <p class="control">
+                        {{ form.address1 |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="field">
+                          <p class="control">
+                            {{ form.town |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="field">
+                          <p class="control">
+                            {{ form.city |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="field">
+                          <p class="control">
+                            {{ form.country |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="field">
+                          <div class="field">
+                            <!-- <label class="form-label">Postal/Zip Code</label> -->
+                              {{ form.postcode |as_crispy_field}}                      
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
+                    <div class="field">
+                      <!-- <label class="form-label">what 3 words</label> -->
+                      <p class="control">
+                        {{ form.what3words |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <!-- <label class="form-label">Contact Name</label> -->
+                      <p class="control">
+                        {{ form.contactName |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="field">
+                          <!-- <label class="form-label">Landline</label> -->
+                          <p class="control">
+                            {{ form.landline |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="field">
+                          <!-- <label class="form-label">Mobile Number</label> -->
+                          <p class="control">
+                            {{ form.mobile |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="field">
+                          <!-- <label class="form-label">Email</label> -->
+                          <p class="control">
+                            {{ form.email |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <hr>
+    
+                    <h2>Social Media</h2> 
+    
+                    <div class="field">
+                      <label class="form-label">Facebook</label>
+                      <p class="control">
+                        {{ form.facebook |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <label class="form-label">Instagram</label>
+                      <p class="control">
+                        {{ form.instagram |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <label class="form-label">YouTube</label>
+                      <p class="control">
+                        {{ form.youtube |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <label class="form-label">Twitter</label>
+                      <p class="control">
+                        {{ form.twitter |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <label class="form-label">Telegram</label>
+                      <p class="control">
+                        {{ form.telegram |as_crispy_field}}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-
-                <div class="field">
-                  <label class="form-label">Masjid Name</label>
-                  <p class="control">
-                    {{ user_form.masjid_name }}
-                  </p>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Prayer Calculation Methods
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="field">
+                          <!-- <label class="form-label">Prayer Calculation Method</label> -->
+                          <p class="control">
+                            {{ form.method |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="field">
+                          <!-- <label class="form-label">Shafaq Calculation</label> -->
+                          <p class="control">
+                            {{ form.shafaq |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="field">
+                          <!-- <label class="form-label">School</label> -->
+                          <p class="control">
+                            {{ form.school |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="field">
+                          <!-- <label class="form-label">Latitude</label> -->
+                          <p class="control">
+                            {{ form.latitude |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="field">
+                          <!-- <label class="form-label">Longitude</label> -->
+                          <p class="control">
+                            {{ form.longitude |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
+                    <div class="field">
+                      <!-- <label class="form-label">Fajr Jamah</label> -->
+                      <p class="control">
+                        {{ form.fajr_jamaah_minutes |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <!-- <label class="form-label">Dhuhr Jamaah</label> -->
+                      <p class="control">
+                        {{ form.dhuhr_jamaah_minutes |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <!-- <label class="form-label">Asr Jamaah</label> -->
+                      <p class="control">
+                        {{ form.asr_jamaah_minutes |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <!-- <label class="form-label">Maghrib Jamaah</label> -->
+                      <p class="control">
+                        {{ form.maghrib_jamaah_minutes |as_crispy_field}}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <!-- <label class="form-label">Isha Jamaah</label> -->
+                      <p class="control">
+                        {{ form.isha_jamaah_minutes |as_crispy_field}}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="field">
-                  <label class="form-label">Masjid Logo</label>
-                  <img src="{{masjid.masjidLogo.url}}" width="40px" alt="">
-                  <p class="control">
-                    {{ user_form.masjidLogo }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">About Masjid</label>
-                  <p class="control">
-                    {{ user_form.about }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">First Line of Address</label>
-                  <p class="control">
-                    {{ user_form.address1 }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Town</label>
-                  <p class="control">
-                    {{ user_form.town }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">City</label>
-                  <p class="control">
-                    {{ user_form.city }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Country</label>
-                  <p class="control">
-                    {{ user_form.country }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Postal/Zip Code</label>
-                  <p class="control">
-                    {{ user_form.postcode }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">what 3 words</label>
-                  <p class="control">
-                    {{ user_form.what3words }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Contact Name</label>
-                  <p class="control">
-                    {{ user_form.contactName }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Landline</label>
-                  <p class="control">
-                    {{ user_form.landline }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Mobile Number</label>
-                  <p class="control">
-                    {{ user_form.mobile }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Email</label>
-                  <p class="control">
-                    {{ user_form.email }}
-                  </p>
-                </div>
-
-                Social Media 
-
-                <div class="field">
-                  <label class="form-label">Facebook</label>
-                  <p class="control">
-                    {{ user_form.facebook }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Instagram</label>
-                  <p class="control">
-                    {{ user_form.instagram }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">YouTube</label>
-                  <p class="control">
-                    {{ user_form.youtube }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Twitter</label>
-                  <p class="control">
-                    {{ user_form.twitter }}
-                  </p>
-                </div>
-                <div class="field">
-                  <label class="form-label">Telegram</label>
-                  <p class="control">
-                    {{ user_form.telegram }}
-                  </p>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Site Colours
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="field">
+                          <!-- <label class="form-label">Main Colour</label> -->
+                          <p class="control">
+                            {{ form.mainColour |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="field">
+                          <!-- <label class="form-label">Accent Colour</label> -->
+                          <p class="control">
+                            {{ form.accentColour |as_crispy_field}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              
-              <div class="field">
-                <label class="form-label">Prayer Calculation Method</label>
-                <p class="control">
-                  {{ user_form.method }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Shafaq Calculation</label>
-                <p class="control">
-                  {{ user_form.shahaq }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">School</label>
-                <p class="control">
-                  {{ user_form.school }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Latitude</label>
-                <p class="control">
-                  {{ user_form.latitude }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Longitude</label>
-                <p class="control">
-                  {{ user_form.longitude }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Fajr Jamah</label>
-                <p class="control">
-                  {{ user_form.fajr_jamaah_minutes }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Dhuhr Jamaah</label>
-                <p class="control">
-                  {{ user_form.dhuhr_jamaah_minutes }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Asr Jamaah</label>
-                <p class="control">
-                  {{ user_form.asr_jamaah_minutes }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Maghrib Jamaah</label>
-                <p class="control">
-                  {{ user_form.maghrib_jamaah_minutes }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Isha Jamaah</label>
-                <p class="control">
-                  {{ user_form.isha_jamaah_minutes }}
-                </p>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-              
-              <div class="field">
-                <label class="form-label">Main Colour</label>
-                <p class="control">
-                  {{ user_form.mainColour }}
-                </p>
-              </div>
-              <div class="field">
-                <label class="form-label">Accent Colour</label>
-                <p class="control">
-                  {{ user_form.accentColour }}
-                </p>
-              </div>
 
-            </div>
-          </div>
+            
+            
+            
+            <!-- {{ form|crispy }} -->
            
-            <input type="submit" value="Save Profile" class="button is-primary">
+            <input type="submit" value="Save Profile" class="btn btn-primary">
           </form>
           
         </div>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="px-4 py-5 my-5 text-center">
+  <img class="d-block mx-auto mb-4" src="{{masjid.masjidLogo.url}}" alt="" width="80" height="80">
+  <h1 class="display-5 fw-bold">About {{masjid.masjid_name|title}}</h1>
+</div>
+
+<div class="container-sm">
+  <h2>Contact Us</h2>
+
+  <div class="row" style="height:550px;">
+    <div class="col-md-6 maps" >
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11880.492291371422!2d12.4922309!3d41.8902102!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28f1c82e908503c4!2sColosseo!5e0!3m2!1sit!2sit!4v1524815927977" frameborder="0" style="border:0" allowfullscreen></iframe>
+   </div>
+  </div>
+</div>
+
+
+<div class="container-sm">100% wide until small breakpoint</div>
+
+  
+
+  {% endblock content %}

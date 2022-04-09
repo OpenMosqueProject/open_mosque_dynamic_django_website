@@ -118,12 +118,6 @@ def month_view(request):
         day_no = row["date"]["gregorian"]["day"]
         day_ab = row["date"]["gregorian"]["weekday"]
         month_data.append({'fajr':fajr,'fajr_j':fajr_j,'sunrise':sunrise, 'dhuhr':dhuhr, 'dhuhr_j':dhuhr_j,'asr':asr,'asr_j':asr_j,'maghrib':maghrib,'maghrib_j':maghrib_j, 'isha':isha,'isha_j':isha_j,'month':mon, 'date':date, 'weekday':weekday,'day_no':day_no, 'day_ab':day_ab})
-    #print(month_data)
-    #print(d)
-    #####
-    # The data for the table needs to be parsed in HTML. 
-    # TODO - see if there is a built in HTMX module for parsing the JSON data from the backend.
-    # The backend will be continued to source the data as opposed to making the API call from the front end
-    # because the backend will have user data eg latitude etc. although...... This can be passed to the front end easily!
+    
     context = {'d':json.dumps(month_data)}
     return render(request, 'posts/month.html', context)

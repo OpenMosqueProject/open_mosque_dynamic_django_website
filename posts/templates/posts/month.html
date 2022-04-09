@@ -29,8 +29,7 @@
 
   <script>
     var obj = JSON.parse('{{ d | escapejs }}');
-    // console.log(obj[0]["fajr"]); // TODO need to explore slicing output to remove (GMT from table)
-    var mytable = '<table class="table text-center"><thead class=" thead-light"><tr><th scope="col">'+ " " +'</th>';
+    var mytable = '<table class="table text-center"><thead class=" thead-light"><tr><th scope="col"><i class="fa-solid fa-calendar-days"></i></th>';
     mytable += '<th scope="col" colspan="2">Fajr</th>'; 
     mytable += '<th scope="col">Sunrise</th>';
     mytable += '<th scope="col" colspan="2">Dhuhr</th>';
