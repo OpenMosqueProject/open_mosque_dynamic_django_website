@@ -44,3 +44,4 @@ resources I have used to put together this template
 - https://colorlib.com/wp/template/carousel-19/
 - Blue mosque image - https://commons.wikimedia.org/wiki/File:Blue_Mosque_2017.jpg
 - Latitude, Longitude finder https://www.latlong.net/
+- https://www.embedgooglemap.net/
