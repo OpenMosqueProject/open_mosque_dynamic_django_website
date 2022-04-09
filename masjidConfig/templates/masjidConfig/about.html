@@ -8,6 +8,10 @@
   <h1 class="display-5 fw-bold">About {{masjid.masjid_name|title}}</h1>
 </div>
 
+<div class="container">
+  <p>{{masjid.about}}</p>
+</div>
+
 <div class="container-sm">
   <h2>Contact Us</h2>
 
@@ -41,10 +45,11 @@
           {% if masjid.country %}<br>{{masjid.country}}{% endif %}
           
         </p>
-        {% if masjid.landline %}<p><i class="fa-solid fa-phone"></i> {{masjid.landline}}</p>{% endif %}
-        {% if masjid.mobile %}<p><i class="fa-solid fa-mobile-screen-button"></i> {{masjid.mobile}}</p>{% endif %}
-        {% if masjid.email %}<p><i class="fa-solid fa-at"></i> {{masjid.email}}</p>{% endif %}
-        {% if masjid.what3words %}/// {{masjid.what3words}}</p>{% endif %}
+        {% if masjid.landline %}<br><i class="fa-solid fa-phone"></i> {{masjid.landline}}{% endif %}
+        {% if masjid.mobile %}<br><i class="fa-solid fa-mobile-screen-button"></i> {{masjid.mobile}}{% endif %}
+        {% if masjid.email %}<br><i class="fa-solid fa-at"></i> <a href="mailto:{{masjid.email}}">{{masjid.email}}</a>{% endif %}
+        {% if masjid.what3words %}<br><img src="{% static 'images/w3w.png' %}" height="48px"><a href="https://what3words.com/{{masjid.what3words}}">{{masjid.what3words}}</a>{% endif %}
+        
       </div>
     </div>
     <br>

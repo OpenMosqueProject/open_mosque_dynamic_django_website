@@ -20,6 +20,8 @@
             </ul>
           </div>
         <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Select</button>
+        <button class="btn btn-primary btn-lg px-4 gap-3"
+          onclick="printFunction()"><i class="fa-solid fa-print"></i></button>
         
       </div>
     </div>
@@ -108,6 +110,11 @@
   mytable += "</tbody></table>";
   document.getElementById('mytable').innerHTML = mytable;
 
+  </script>
+  <script>
+    function printFunction() { 
+      window.print(); 
+    }
   </script>
 
   {% endblock content %}

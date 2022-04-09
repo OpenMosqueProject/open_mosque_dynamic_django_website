@@ -6,24 +6,24 @@ from .models import Post
 
 from masjidConfig.models import CentreProfile
 
-masjid = CentreProfile.objects.get()
+# masjid = CentreProfile.objects.get()
 
-##### Variables loaded from centre profile here #####
-masjid_name = masjid.masjid_name 
-city = masjid.city 
-country = masjid.country 
-method = masjid.method
-longitude = masjid.longitude
-latitude = masjid.latitude
-current_time = datetime.datetime.now()
-month = current_time.month
-year = current_time.year
-fajr_jam_min = masjid.fajr_jamaah_minutes
-dh_jam_min = masjid.dhuhr_jamaah_minutes
-asr_jamaah_minutes = masjid.asr_jamaah_minutes
-maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
-isha_jamaah_minutes = masjid.isha_jamaah_minutes
-###############################################
+# ##### Variables loaded from centre profile here #####
+# masjid_name = masjid.masjid_name 
+# city = masjid.city 
+# country = masjid.country 
+# method = masjid.method
+# longitude = masjid.longitude
+# latitude = masjid.latitude
+# current_time = datetime.datetime.now()
+# month = current_time.month
+# year = current_time.year
+# fajr_jam_min = masjid.fajr_jamaah_minutes
+# dh_jam_min = masjid.dhuhr_jamaah_minutes
+# asr_jamaah_minutes = masjid.asr_jamaah_minutes
+# maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
+# isha_jamaah_minutes = masjid.isha_jamaah_minutes
+# ###############################################
 
 '''This function is used to round the time UP to the nearest 5,10,15
 For more info, the idea is taken from 
@@ -53,6 +53,24 @@ def jamaah_calculator(azaanTime, minutesAfter):
 # 17:05 displaying as 17:5 or 20:00 displaying as 20:0
 
 def home(request):
+    masjid = CentreProfile.objects.get()
+
+    ##### Variables loaded from centre profile here #####
+    masjid_name = masjid.masjid_name 
+    city = masjid.city 
+    country = masjid.country 
+    method = masjid.method
+    longitude = masjid.longitude
+    latitude = masjid.latitude
+    current_time = datetime.datetime.now()
+    month = current_time.month
+    year = current_time.year
+    fajr_jam_min = masjid.fajr_jamaah_minutes
+    dh_jam_min = masjid.dhuhr_jamaah_minutes
+    asr_jamaah_minutes = masjid.asr_jamaah_minutes
+    maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
+    isha_jamaah_minutes = masjid.isha_jamaah_minutes
+    ###############################################
     posts = Post.objects.all()
 
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
@@ -86,6 +104,24 @@ def home(request):
     return render(request, 'posts/home.html', context)
 
 def month_view(request):
+    masjid = CentreProfile.objects.get()
+
+    ##### Variables loaded from centre profile here #####
+    masjid_name = masjid.masjid_name 
+    city = masjid.city 
+    country = masjid.country 
+    method = masjid.method
+    longitude = masjid.longitude
+    latitude = masjid.latitude
+    current_time = datetime.datetime.now()
+    month = current_time.month
+    year = current_time.year
+    fajr_jam_min = masjid.fajr_jamaah_minutes
+    dh_jam_min = masjid.dhuhr_jamaah_minutes
+    asr_jamaah_minutes = masjid.asr_jamaah_minutes
+    maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
+    isha_jamaah_minutes = masjid.isha_jamaah_minutes
+    ###############################################
     month_api = requests.get(f'http://api.aladhan.com/v1/calendar?latitude={latitude}&longitude={longitude}&country={country}&method={method}&month={month}&year={year}')
     data = month_api.json()
     d = data['data']
