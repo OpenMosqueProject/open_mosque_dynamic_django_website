@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from .forms import MasjidEditForm
 from .models import *
+
 # Create your views here.
 
 masjid = CentreProfile.objects.get()
