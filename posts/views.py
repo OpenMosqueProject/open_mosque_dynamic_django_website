@@ -6,25 +6,6 @@ from .models import Post
 
 from masjidConfig.models import CentreProfile
 
-# masjid = CentreProfile.objects.get()
-
-# ##### Variables loaded from centre profile here #####
-# masjid_name = masjid.masjid_name 
-# city = masjid.city 
-# country = masjid.country 
-# method = masjid.method
-# longitude = masjid.longitude
-# latitude = masjid.latitude
-# current_time = datetime.datetime.now()
-# month = current_time.month
-# year = current_time.year
-# fajr_jam_min = masjid.fajr_jamaah_minutes
-# dh_jam_min = masjid.dhuhr_jamaah_minutes
-# asr_jamaah_minutes = masjid.asr_jamaah_minutes
-# maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
-# isha_jamaah_minutes = masjid.isha_jamaah_minutes
-# ###############################################
-
 '''This function is used to round the time UP to the nearest 5,10,15
 For more info, the idea is taken from 
 https://stackoverflow.com/questions/13071384/ceil-a-datetime-to-next-quarter-of-an-hour

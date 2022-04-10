@@ -28,8 +28,8 @@ This causes 2 issues. Before you can run the program for the first time, migrate
 
 - on line 3 of the base.html comment out --> {% get_solo 'masjidConfig.CentreProfile' as masjid %}
 - on line 10 of masjidConfig views.py comment out --> masjid = CentreProfile.objects.get()
-- on line 9 of posts views.py comment out --> masjid = CentreProfile.objects.get() 
-- lastly again in posts views.py comment out the variables on lines 12-25
+- on line 37 & 88 of posts views.py comment out --> masjid = CentreProfile.objects.get() 
+- lastly again in posts views.py comment out the variables on lines 40-53 & 91-104
 
 Unfortunately, this issue crops up again if you are making changes to the masjidConfig model so do the above again
 

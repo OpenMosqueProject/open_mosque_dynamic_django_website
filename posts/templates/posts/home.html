@@ -8,8 +8,12 @@
         {% include 'posts/partials/daily_time.html' %}
     </div>
     <div class="col-9">
-        <img src="https://theistanbulinsider.com/wp-content/uploads/2020/03/blue-mosque-aerial.jpg" class="overflow-hidden">
-        <small><p>Photo by <a href="https://unsplash.com/@sylwiabartyzel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sylwia Bartyzel</a> on <a href="https://unsplash.com/backgrounds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p></small>
+        {% if masjid.masjidPhoto %}
+            <img src="{{masjid.masjidPhoto.url}}" class="overflow-hidden">
+        {% else %}
+            <img src="https://theistanbulinsider.com/wp-content/uploads/2020/03/blue-mosque-aerial.jpg" class="overflow-hidden">
+            <small><p>Photo by <a href="https://unsplash.com/@sylwiabartyzel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sylwia Bartyzel</a> on <a href="https://unsplash.com/backgrounds?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p></small>
+        {% endif %}
     </div>
 </div>
 
@@ -17,7 +21,6 @@
 <!-- ***************************************************************************** 
     This is the slider section on the page. Populate with posts from the posts app
     Images are best 1000x667 or ***
-
     ***************************************************************************** -->
 <section class="ftco-section">
     <div class="container">
