@@ -11,10 +11,14 @@
         <img src="{{post.image.url}}">
 </div>
  
-
+<hr>
 <h1>{{post.title|title}}</h1>
-<h4>{{post.type}} - Published: {{post.published_date}} 
-    {% if post.edited %} (edited: post.edited) {% endif %}</h4>
+<hr>
+<h5>
+    <i class="fa-solid fa-newspaper"></i> {{post.type}} - 
+    <i class="fa-solid fa-calendar"></i> Published: {{post.published_date}} 
+    {% if post.edited %}<i class="fa-solid fa-pen-ruler"></i> (edited: post.edited) {% endif %}
+</h5>
 <p><br>{{post.content}}</p>
 
 {% endblock content %}
