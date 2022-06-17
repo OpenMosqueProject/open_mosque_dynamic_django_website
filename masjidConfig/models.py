@@ -1,6 +1,7 @@
 from email.policy import default
 from django.db import models
-from solo.models import SingletonModel
+
+#from solo.models import SingletonModel
 
 SHIA = 0
 UIS = 1
@@ -94,7 +95,7 @@ ISHA_JAMAAH = [
 ]
 
 # Site settings model
-class CentreProfile(SingletonModel):
+class CentreProfile(models.Model): # removed SingletonModel
     maintenance_mode = models.BooleanField(default=False)
     masjid_name = models.CharField(max_length=255, default='Open Mosque Project')
     masjidLogo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')

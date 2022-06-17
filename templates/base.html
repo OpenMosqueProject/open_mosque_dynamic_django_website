@@ -1,6 +1,7 @@
 {% load static %}
-{% load solo_tags %}
-{% get_solo 'masjidConfig.CentreProfile' as masjid %}
+<!-- Possibly load a registered tag here for masjid details -->
+{% load masjid_tags %}
+{% get_masjid as masjid_base %}
 <html>
     <head>
         <!-- CSS only -->
@@ -34,11 +35,11 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <a class="navbar-brand" href="{% url 'posts:home' %}">
-                  <img src="{{masjid.masjidLogo.url}}" alt="" width="50" height="50">
+                  <img src="{{masjid_base.masjidLogo.url}}" alt="" width="50" height="50">
                 </a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'posts:home' %}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'posts:home' %}">{{masjid_base.masjid_name}} Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'posts:month_view'%}">Monthly Prayer Times</a>

@@ -7,8 +7,7 @@ from .forms import MasjidEditForm
 from .models import *
 
 # Create your views here.
-
-masjid = CentreProfile.objects.get()
+masjid = CentreProfile.objects.get(pk=1 or None)
 
 @login_required
 def edit_profile(request):  

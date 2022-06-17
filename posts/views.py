@@ -34,7 +34,7 @@ def jamaah_calculator(azaanTime, minutesAfter):
 # 17:05 displaying as 17:5 or 20:00 displaying as 20:0
 
 def home(request):
-    masjid = CentreProfile.objects.get()
+    masjid = CentreProfile.objects.get(pk=1 or None)
 
     ##### Variables loaded from centre profile here #####
     masjid_name = masjid.masjid_name 
@@ -85,7 +85,7 @@ def home(request):
     return render(request, 'posts/home.html', context)
 
 def month_view(request):
-    masjid = CentreProfile.objects.get()
+    masjid = CentreProfile.objects.get(pk=1 or None)
 
     ##### Variables loaded from centre profile here #####
     masjid_name = masjid.masjid_name 
