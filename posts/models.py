@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.placeholder import OnStoragePlaceholderImage
 
@@ -18,3 +19,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self, id=id or None):
+        return reverse("posts:post_view", kwargs={'id':self.id})

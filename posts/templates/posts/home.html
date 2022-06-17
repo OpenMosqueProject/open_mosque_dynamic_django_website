@@ -33,7 +33,7 @@
                     {% for post in posts %}
                     <div class="item">
                         <div class="blog-entry">
-                            <a href="#" class="block-20 d-flex align-items-start"
+                            <a href="{{ post.get_absolute_url }}" class="block-20 d-flex align-items-start"
                                 style="background-image: url('{{ post.image.url }}');">
                                 <div class="meta-date text-center p-2">
                                     <span class="day">{{post.published_date|date:"d"}}</span>
@@ -42,10 +42,10 @@
                                 </div>
                             </a>
                             <div class="text border border-top-0 p-4">
-                                <h3 class="heading"><a href="#">{{post.title}}</a></h3>
+                                <h3 class="heading"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h3>
                                 <p>{{post.content|truncatewords:10}}</p>
                                 <div class="d-flex align-items-center mt-4">
-                                    <p class="mb-0"><a href="#" class="btn btn-primary">Read More <span
+                                    <p class="mb-0"><a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More <span
                                                 class="ion-ios-arrow-round-forward"></span></a></p>
                                     <p class="ml-auto meta2 mb-0">
                                         <a class="mr-2">{{post.type}}</a>

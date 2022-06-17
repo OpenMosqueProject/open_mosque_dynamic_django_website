@@ -138,3 +138,8 @@ def month_view(request):
     
     context = {'d':json.dumps(month_data)}
     return render(request, 'posts/month.html', context)
+
+def post_view(request, id):
+    post = Post.objects.get(id=id)
+    context = {'post':post}
+    return render(request, 'posts/post_view.html', context)
