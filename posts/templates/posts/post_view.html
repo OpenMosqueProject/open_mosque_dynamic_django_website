@@ -17,7 +17,7 @@
 <h5>
     <i class="fa-solid fa-newspaper"></i> {{post.type}} - 
     <i class="fa-solid fa-calendar"></i> Published: {{post.published_date}} 
-    {% if post.edited %}<i class="fa-solid fa-pen-ruler"></i> (edited: post.edited) {% endif %}
+    {% if post.updated_date %}<sub><i class="fa-solid fa-pen-ruler"></i> (edited: {{post.updated_date}}) </sub>{% endif %}
 </h5>
 <p><br>{{post.content}}</p>
 

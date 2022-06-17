@@ -1,25 +1,25 @@
 {% load static %}
-{% if masjid.instagram %}
+{% if masjid_base.instagram %}
 <a href="https://instagram.com/{{masjid.instagram}}">
     <i class="fa-brands fa-instagram fa-2xl"></i>
 </a>
 {% endif %}
-{% if masjid.facebook %}
+{% if masjid_base.facebook %}
 <a href="https://facebook.com/{{masjid.facebook}}">
     <i class="fa-brands fa-facebook fa-2xl"></i>
 </a>
 {% endif %}
-{% if masjid.telegram %}
+{% if masjid_base.telegram %}
 <a href="https://t.me/{{masjid.telegram}}">
     <i class="fa-brands fa-telegram fa-2xl"></i>
 </a>
 {% endif %}
-{% if masjid.youtube %}
+{% if masjid_base.youtube %}
 <a href="https://youtube.com/user/{{masjid.youtube}}">
     <i class="fa-brands fa-youtube fa-2xl"></i>
 </a>
 {% endif %}
-{% if masjid.twitter %}
+{% if masjid_base.twitter %}
 <a href="https://twitter.com/{{masjid.twitter}}">
     <i class="fa-brands fa-twitter fa-2xl"></i>
 </a>

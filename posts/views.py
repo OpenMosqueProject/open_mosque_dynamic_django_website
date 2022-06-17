@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.utils.safestring import SafeString
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 import requests, json, datetime
+from .forms import PostForm
 from .models import Post
 
 from masjidConfig.models import CentreProfile
@@ -143,3 +147,19 @@ def post_view(request, id):
     post = Post.objects.get(id=id)
     context = {'post':post}
     return render(request, 'posts/post_view.html', context)
+
+@login_required
+def post_form(request):  
+    post = Post.objects.get(id=request.id)
+    if request.method == 'POST':
+        form = PostForm(data=request.POST or None, instance=post)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('masjidConfig:edit_profile'))
+    else:
+        form = PostForm(data=request.POST or None, instance=post)
+    context = {
+        'form':form,
+        }
+    return render(request, 'masjidConfig/edit_profile.html', context)
