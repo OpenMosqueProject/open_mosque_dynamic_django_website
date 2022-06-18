@@ -44,7 +44,7 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'posts:month_view'%}">Monthly Prayer Times</a>
                   </li>
-                  <li class="nav-item dropdown">
+                  <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Services
                     </a>
@@ -53,7 +53,7 @@
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'masjidConfig:about' %}">About us</a>
                   </li>
@@ -84,61 +84,7 @@
 
 
           <div class="bg-light">
-            <footer class="container py-5">
-              <div class="row">
-                <div class="col-6 col-md-2 mb-3">
-                  <h5>Section</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                  </ul>
-                </div>
-
-                <div class="col-6 col-md-2 mb-3">
-                  <h5>Section</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                  </ul>
-                </div>
-
-                <div class="col-6 col-md-2 mb-3">
-                  <h5>Section</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                  </ul>
-                </div>
-
-                <div class="col-md-5 offset-md-1 mb-3">
-                  <form>
-                    <h5>Subscribe to our newsletter</h5>
-                    <p>Monthly digest of what's new and exciting from us.</p>
-                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                      <label for="newsletter1" class="visually-hidden">Email address</label>
-                      <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                      <button class="btn btn-primary" type="button">Subscribe</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>&copy; 2022 Company, Inc. All rights reserved.</p>
-                <div class="d-flex justify-content-center">
-                  {% include 'social_media_icons.html' %}
-                </div>
-              </div>
-            </footer>
+            {% include 'footer.html' %}
           </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
