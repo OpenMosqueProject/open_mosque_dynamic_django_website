@@ -29,7 +29,6 @@
             <div class="col-md-12">
                 <div class="featured-carousel owl-carousel">
 
-                    
                     {% for post in posts %}
                     <div class="item">
                         <div class="blog-entry">
@@ -44,7 +43,7 @@
                             <div class="text border border-top-0 p-4">
                                 <h3 class="heading"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h3>
                                 <p>{{post.content|truncatewords:10}}</p>
-                                <div class="d-flex align-items-center mt-4">
+                                <div class="d-flex align-items-center justify-content-between mt-4">
                                     <p class="mb-0"><a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More <span
                                                 class="ion-ios-arrow-round-forward"></span></a></p>
                                     <p class="ml-auto meta2 mb-0">
