@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.utils.safestring import SafeString
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -149,17 +149,14 @@ def post_view(request, id):
     return render(request, 'posts/post_view.html', context)
 
 @login_required
-def post_form(request):  
-    post = Post.objects.get(id=request.id)
-    if request.method == 'POST':
-        form = PostForm(data=request.POST or None, instance=post)
-        
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('masjidConfig:edit_profile'))
+def post_form(request): 
+    form = PostForm(request.POST, request.FILES) 
+    if form.is_valid():
+        form.save()
+        return redirect('posts:home')
     else:
-        form = PostForm(data=request.POST or None, instance=post)
-    context = {
-        'form':form,
-        }
-    return render(request, 'masjidConfig/edit_profile.html', context)
+        form = PostForm()
+        context = {'form':form}
+        return render(request, 'posts/post_form.html', context)
+
+

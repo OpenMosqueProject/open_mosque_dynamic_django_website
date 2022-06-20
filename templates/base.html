@@ -61,13 +61,19 @@
                   {% include 'social_media_icons.html' %}
                 </div>
                 {% if user.is_authenticated %}
-                <form class="d-flex">
-                  <a class="btn btn-primary" href="{% url 'masjidConfig:edit_profile' %}">Edit Details</a>
-                  <button class="btn btn-primary">Logout</button>
-                </form>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle mx-1" data-bs-toggle="dropdown" aria-expanded="false">Admin</button>
+                  <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><a class="dropdown-item" href="{% url 'posts:post_form' %}"><i class="fa-solid fa-plus"></i> Add Post</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'masjidConfig:edit_profile' %}">Edit Website Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="btn btn-danger btn-sm ml-lg-4">Logout</a></li>
+                  </ul>
+                </div>
                 {% else %}
                 <form class="d-flex">
-                  <button class="btn btn-primary">Login</button>
+                  <a class="btn btn-primary mx-1">Login</a>
                 </form>
                 {% endif %}
               </div>
