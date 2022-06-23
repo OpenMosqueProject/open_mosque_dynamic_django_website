@@ -35,9 +35,9 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'crispy_forms',
     "crispy_bootstrap5",
-    #'compressor',
+    'compressor',
     'sass_processor',
-    
+
     # my apps
     'posts',
     'masjidConfig',
@@ -175,6 +175,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'sass_processor.finders.CssFinder',
+    'compressor.finders.CompressorFinder',
 ]
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
