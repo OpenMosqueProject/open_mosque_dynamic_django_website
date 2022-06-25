@@ -159,4 +159,7 @@ def post_form(request):
         context = {'form':form}
         return render(request, 'posts/post_form.html', context)
 
-
+def post_list_view(request):
+    posts = Post.objects.filter(type='News').order_by('-published_date').values()
+    context = {'posts':posts}
+    return render(request, 'posts/posts_list.html', context)

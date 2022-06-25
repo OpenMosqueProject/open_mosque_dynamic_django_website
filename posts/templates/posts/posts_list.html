@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Our Posts</h1>
+
+
+{% for post in posts %}
+<div class="card mb-3" style="max-width: 1000px;">
+    <ul class="list-group">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {% if post.image %}
+                    <img src="{{post.image.url}}" class="img-fluid rounded-start">
+                {% else %}
+                    <img src="{% static 'images/default_image.jpg' %}" class="img-fluid rounded-start">
+                {% endif %}
+            </div>
+            <div class="col-md-8" style="max-height: 100%;">
+                <div class="card-body" >
+                    <h5 class="card-title"><a href="{% url 'posts:post_view' post.id %}"> {{post.title}} </a></h5>
+                    <p class="card-text">{{post.content|truncatewords:30}}</p>
+                    <div class="d-flex justify-content-between">
+                        <div class="card-text align-self-end">{{post.published_date}} </div>
+                        <div class="align-self-end">{% if post.updated_date %}<small class="text-muted">Last updated {{post.updated_date}}</small>{% endif %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ul>
+</div>
+{% endfor %}
+
+
+{% endblock content %}

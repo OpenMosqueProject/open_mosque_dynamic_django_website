@@ -9,5 +9,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('monthly_times/', views.month_view, name='month_view'),
     path('post/<int:id>', views.post_view, name='post_view'),
+    path('posts', views.post_list_view, name='post_list'),
     path('create_post', views.post_form, name='post_form'),
 ]
