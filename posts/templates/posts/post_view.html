@@ -19,6 +19,6 @@
     <i class="fa-solid fa-calendar"></i> Published: {{post.published_date}} 
     {% if post.updated_date %}<sub><i class="fa-solid fa-pen-ruler"></i> (edited: {{post.updated_date}}) </sub>{% endif %}
 </h5>
-<p><br>{{post.content}}</p>
+<p><br>{{post.content|safe}}</p>
 
 {% endblock content %}
