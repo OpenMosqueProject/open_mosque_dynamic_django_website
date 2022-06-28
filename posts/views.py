@@ -163,3 +163,9 @@ def post_list_view(request):
     posts = Post.objects.filter(type='News').order_by('-published_date').values()
     context = {'posts':posts}
     return render(request, 'posts/posts_list.html', context)
+
+@login_required
+def posts_admin(request):
+    posts = Post.objects.filter(type='News').order_by('-published_date').values()
+    context = {'posts':posts}
+    return render(request, 'posts/posts_admin.html', context)
