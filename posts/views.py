@@ -3,6 +3,7 @@ from django.utils.safestring import SafeString
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 
 import requests, json, datetime
 from .forms import PostForm
@@ -169,3 +170,14 @@ def posts_admin(request):
     posts = Post.objects.filter(type='News').order_by('-published_date').values()
     context = {'posts':posts}
     return render(request, 'posts/posts_admin.html', context)
+
+
+@require_http_methods(['DELETE'])
+def delete_post(request, id):
+    Post.objects.filter(id=id).delete()
+    posts = Post.objects.all()
+    return render(request, 'posts/posts_list.html', {'posts': posts})
+
+
+def hide_post_toggle(request):
+    pass
