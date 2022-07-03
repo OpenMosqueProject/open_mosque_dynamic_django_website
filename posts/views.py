@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
+from django.db.models import Case, Value, When
+
 
 import requests, json, datetime
 from .forms import PostForm
@@ -175,9 +177,19 @@ def posts_admin(request):
 @require_http_methods(['DELETE'])
 def delete_post(request, id):
     Post.objects.filter(id=id).delete()
-    posts = Post.objects.all()
-    return render(request, 'posts/posts_list.html', {'posts': posts})
+    posts = Post.objects.filter(type='News').order_by('-published_date').values()
+    return render(request, 'posts/partials/admin-posts-partial.html', {'posts': posts})
 
-
-def hide_post_toggle(request):
-    pass
+@login_required
+def hide_post_toggle(request, id):
+    post = Post.objects.filter(id=id)
+    print(f"Post status {post.published}")
+    if not post.published:
+        post.published = True
+        post.save()
+    else:
+        post.published = False
+        post.save()
+    
+    posts = Post.objects.filter(type='News').order_by('-published_date').values()
+    return render(request, 'posts/partials/admin-posts-partial.html', {'posts': posts})

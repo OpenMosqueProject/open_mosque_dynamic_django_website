@@ -4,48 +4,16 @@
 {% block content %}
 
 <h1>Our Posts</h1>
+{% include 'posts/partials/admin-posts-partial.html' %}
 
-<div id="posts_list" 
+<!-- <div id="posts_list" 
     hx-confirm="Are you sure you want to delete this post?"
     hx-target="#posts_list"
-    hx-swap="outerHTML">
-{% for post in posts %}
-<div class="card mb-3" style="max-width: 1000px;">
-    <ul class="list-group">
-        <div class="row g-0">
-            <div class="col-md-3">
-                {% if post.image %}
-                    <img src="{{post.image.url}}" class="img-fluid rounded-start">
-                {% else %}
-                    <img src="{% static 'images/default_image.jpg' %}" class="img-fluid rounded-start">
-                {% endif %}
-            </div>
-            <div class="col-md-7" style="max-height: 100%;">
-                <div class="card-body" >
-                    <h5 class="card-title"><a href="{% url 'posts:post_view' post.id %}"> {{post.title}} </a></h5>
-                    <p class="card-text">{{post.content|truncatewords:30}}</p>
-                    <div class="d-flex justify-content-between">
-                        <div class="card-text align-self-end">{{post.published_date}} </div>
-                        <div class="align-self-end">{% if post.updated_date %}<small class="text-muted">Last updated {{post.updated_date}}</small>{% endif %}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                {% if post.published %}
-                    <button class="btn btn-warning my-2"><i class="fa-solid fa-eye"></i> Unpublish</button>
-                {% else %}
-                    <button class="btn btn-success my-2"><i class="fa-solid fa-eye-slash"></i> Publish</button>
-                {% endif %}
-                <br>
-                <button class="btn btn-danger my-2"
-                    hx-delete="{% url 'posts:delete_post' post.id %}">
-                    <i class="fa-solid fa-trash-can"></i> Delete
-                </button>
-            </div>
-        </div>
-    </ul>
-</div>
-{% endfor %}
-</div>
+    hx-swap="outerHTML"
+    > 
+    <div class="card mb-3" style="max-width: 1000px;">
+        <ul class="list-group">
+-->
+
 
 {% endblock content %}
