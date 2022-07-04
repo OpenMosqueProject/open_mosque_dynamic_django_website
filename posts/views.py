@@ -180,10 +180,9 @@ def delete_post(request, id):
     posts = Post.objects.filter(type='News').order_by('-published_date').values()
     return render(request, 'posts/partials/admin-posts-partial.html', {'posts': posts})
 
-@login_required
+@login_required #@require_http_methods(['UPDATE'])
 def hide_post_toggle(request, id):
-    post = Post.objects.filter(id=id)
-    print(f"Post status {post.published}")
+    post = Post.objects.get(id=id)
     if not post.published:
         post.published = True
         post.save()
@@ -191,5 +190,5 @@ def hide_post_toggle(request, id):
         post.published = False
         post.save()
     
-    posts = Post.objects.filter(type='News').order_by('-published_date').values()
-    return render(request, 'posts/partials/admin-posts-partial.html', {'posts': posts})
+    post = Post.objects.get(id=id)
+    return render(request, 'posts/partials/admin-posts-partial.html', {'post': post})
