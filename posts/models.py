@@ -4,10 +4,16 @@ from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.placeholder import OnStoragePlaceholderImage
 
 # Create your models here.
+POST_CHOICES = [
+    ('News', 'News'),
+    ('Events', 'Events'),
+    
+]
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    type = models.CharField(max_length=200)
+    type = models.CharField(max_length=200, choices=POST_CHOICES)
     published = models.BooleanField(default=False)
     published_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

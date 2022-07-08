@@ -190,5 +190,5 @@ def hide_post_toggle(request, id):
         post.published = False
         post.save()
     
-    post = Post.objects.get(id=id)
-    return render(request, 'posts/partials/admin-posts-partial.html', {'post': post})
+    #post = Post.objects.get(id=id)
+    return render(request, 'posts/partials/single_post.html', {'post': post})
