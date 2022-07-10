@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'compressor',
     'sass_processor',
+    'tinymce',
 
     # my apps
     'posts',

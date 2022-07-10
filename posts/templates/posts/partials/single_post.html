@@ -11,7 +11,7 @@
         <div class="col-md-7" style="max-height: 100%;">
             <div class="card-body" >
                 <h5 class="card-title mx-2"><a href="{% url 'posts:post_view' post.id %}"> {{post.title}} </a></h5>
-                <p class="card-text mx-2">{{post.content|truncatewords:30}}</p>
+                <p class="card-text mx-2">{{post.content|safe|truncatewords:30}}</p>
                 <div class="d-flex justify-content-between">
                     <div class="card-text align-self-end ms-2">{{post.published_date}} </div>
                     <div class="align-self-end me-2">{% if post.updated_date %}<small class="text-muted">Last updated {{post.updated_date}}</small>{% endif %}</div>
