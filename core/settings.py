@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'compressor',
     'sass_processor',
+    'ckeditor',
 
     # my apps
     'posts',
@@ -186,9 +187,22 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR,'static/css')
 SASS_PRECISION = 8
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat','colordialog', ]
+        ]
+    }
+}

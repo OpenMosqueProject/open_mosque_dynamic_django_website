@@ -2,7 +2,9 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"> 
+</script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <h1>Create Post Form</h1>
 <br>
 
@@ -10,6 +12,8 @@
   
   <form action="{% url 'posts:post_form' %}" method="POST" enctype="multipart/form-data"> 
     {% csrf_token %}
+    {{ form.media }}
+    
     {{ form | crispy }}
 
     <input type="submit" class="btn btn-primary btn-lg" value="Submit" />
