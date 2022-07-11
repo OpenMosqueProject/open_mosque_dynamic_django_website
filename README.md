@@ -18,12 +18,13 @@ Before trying to run the server
 - create a variable called `SECRET_KEY='replace_this_part_with_secret_key'` in the `.env` file
 - generate a secret key from here https://miniwebtool.com/django-secret-key-generator/
 - between Git Pulls do not forget to run `pip install -r requirements.txt`
+- run `python manage.py collectstatic` to collect static files for ckRTF editor
 - run `python manage.py makemigrations` and `python manage.py migrate`
 
 - *if* new dependencies have been added run `pip freeze > requirements.txt`
 
 ### *Current bug* 🤷‍♂️
-There is an issue with django-solo which is what we are using to save the website profile settings.
+There is an issue with ~django-solo~ DB model settings which is what we are using to save the website profile.
 This causes 2 issues. Before you can run the program for the first time, migrate to the DB or create a superuser be sure to:
 
 - on line 3 of the base.html comment out --> {% get_solo 'masjidConfig.CentreProfile' as masjid %}
