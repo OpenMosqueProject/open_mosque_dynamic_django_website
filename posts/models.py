@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from versatileimagefield.fields import VersatileImageField
 from versatileimagefield.placeholder import OnStoragePlaceholderImage
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 POST_CHOICES = [
@@ -12,7 +13,7 @@ POST_CHOICES = [
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = RichTextField()
     type = models.CharField(max_length=200, choices=POST_CHOICES)
     published = models.BooleanField(default=False)
     published_date = models.DateTimeField(auto_now_add=True)
