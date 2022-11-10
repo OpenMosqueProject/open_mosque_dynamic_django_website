@@ -59,7 +59,7 @@ def home(request):
     maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
     isha_jamaah_minutes = masjid.isha_jamaah_minutes
     ###############################################
-    posts = Post.objects.all()
+    posts = Post.objects.all().filter(published=True)
 
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
     d = api_data.json()
@@ -183,6 +183,7 @@ def delete_post(request, id):
 @login_required #@require_http_methods(['UPDATE'])
 def hide_post_toggle(request, id):
     post = Post.objects.get(id=id)
+    # print(f"Post ID: {post.id}")
     if not post.published:
         post.published = True
         post.save()
