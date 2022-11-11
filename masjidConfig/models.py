@@ -3,6 +3,24 @@ from django.db import models
 
 #from solo.models import SingletonModel
 
+class SingletonModel(models.Model):
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
+
+
 SHIA = 0
 UIS = 1
 ISNA = 2
@@ -95,7 +113,7 @@ ISHA_JAMAAH = [
 ]
 
 # Site settings model
-class CentreProfile(models.Model): # removed SingletonModel
+class CentreProfile(SingletonModel):
     maintenance_mode = models.BooleanField(default=False)
     masjid_name = models.CharField(max_length=255, default='Open Mosque Project')
     masjidLogo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
@@ -111,11 +129,11 @@ class CentreProfile(models.Model): # removed SingletonModel
     school = models.IntegerField(choices=SCHOOL_CHOICES, default=SHAFI)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default=51.443909)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0.219730)
-    fajr_jamaah_minutes = models.CharField(max_length=255, choices=FAJR_JAMAAH)
-    dhuhr_jamaah_minutes = models.CharField(max_length=255, choices=DHUHR_JAMAAH)
-    asr_jamaah_minutes = models.CharField(max_length=255, choices=ASR_JAMAAH)
-    maghrib_jamaah_minutes = models.CharField(max_length=255, choices=MAGHRIB_JAMAAH)
-    isha_jamaah_minutes = models.CharField(max_length=255, choices=ISHA_JAMAAH)
+    fajr_jamaah_minutes = models.CharField(max_length=255, choices=FAJR_JAMAAH, blank=True)
+    dhuhr_jamaah_minutes = models.CharField(max_length=255, choices=DHUHR_JAMAAH, blank=True)
+    asr_jamaah_minutes = models.CharField(max_length=255, choices=ASR_JAMAAH, blank=True)
+    maghrib_jamaah_minutes = models.CharField(max_length=255, choices=MAGHRIB_JAMAAH, blank=True)
+    isha_jamaah_minutes = models.CharField(max_length=255, choices=ISHA_JAMAAH, blank=True)
     mainColour = models.CharField(max_length=7, default='#0d6efd')
     accentColour = models.CharField(max_length=7, default='#adb5bd')
     facebook = models.CharField(max_length=255, blank=True)

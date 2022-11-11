@@ -41,9 +41,9 @@ def jamaah_calculator(azaanTime, minutesAfter):
 # 17:05 displaying as 17:5 or 20:00 displaying as 20:0
 
 def home(request):
-    masjid = CentreProfile.objects.get(pk=1 or None)
+    masjid = CentreProfile.load()
 
-    ##### Variables loaded from centre profile here #####
+    #### Variables loaded from centre profile here #####
     masjid_name = masjid.masjid_name 
     city = masjid.city 
     country = masjid.country 
@@ -59,7 +59,7 @@ def home(request):
     maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
     isha_jamaah_minutes = masjid.isha_jamaah_minutes
     ###############################################
-    posts = Post.objects.all()
+    posts = Post.objects.all().filter(published=True)
 
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
     d = api_data.json()
@@ -92,7 +92,7 @@ def home(request):
     return render(request, 'posts/home.html', context)
 
 def month_view(request):
-    masjid = CentreProfile.objects.get(pk=1 or None)
+    masjid = CentreProfile.load()
 
     ##### Variables loaded from centre profile here #####
     masjid_name = masjid.masjid_name 

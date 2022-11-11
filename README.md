@@ -20,17 +20,18 @@ Before trying to run the server
 - between Git Pulls do not forget to run `pip install -r requirements.txt`
 - run `python manage.py collectstatic` to collect static files for ckRTF editor
 - run `python manage.py makemigrations` and `python manage.py migrate`
+- run `python manage.py createsuperuser`
+- run `python manage.py runserver`
 
 - *if* new dependencies have been added run `pip freeze > requirements.txt`
 
 ### *Current bug* 🤷‍♂️
-There is an issue with ~django-solo~ DB model settings which is what we are using to save the website profile.
-This causes 2 issues. Before you can run the program for the first time, migrate to the DB or create a superuser be sure to:
+There is an issue with the fact that Django currently does not have a solution to creating a singleton model. This means that when first running the `makemigrations` command, you will come across the error that `django.db.utils.OperationalError: no such table: masjidConfig_centreprofile`.
+In order to overcome this, we need to comment out references to queries of the singleton object. 
+These exist in both `views.py` files in the `posts` and `masjidConfig` apps. They will be commented for you to see. Once you have created the table for the singleton model, `CentreProfile` by running the commands, `python manage.py makemigrations` and `python manage.py migrate`, you can then uncomment the queries in reference.
 
-- on line 3 of the base.html comment out --> {% get_solo 'masjidConfig.CentreProfile' as masjid %}
-- on line 10 of masjidConfig views.py comment out --> masjid = CentreProfile.objects.get()
-- on line 37 & 88 of posts views.py comment out --> masjid = CentreProfile.objects.get() 
-- lastly again in posts views.py comment out the variables on lines 40-53 & 91-104
+- on line 10 of masjidConfig views.py comment out --> masjid = CentreProfile.load()
+- lastly again in posts views.py comment out the variables on lines 44-60 & 95-111
 
 Unfortunately, this issue crops up again if you are making changes to the masjidConfig model so do the above again
 
