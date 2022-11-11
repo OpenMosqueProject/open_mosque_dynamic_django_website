@@ -177,7 +177,8 @@
                 </h2>
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
-                    <div class="row">
+                    <div class="row bg-warning">
+                      <label>For help with calculation methods <a href="http://praytimes.org/wiki/Prayer_Times_Calculation" target="_blank">click here</a></label>
                       <div class="col-5">
                         <div class="field">
                           <!-- <label class="form-label">Prayer Calculation Method</label> -->
@@ -203,9 +204,11 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row bg-light">
+                      <label>To work out longitude & latitude <a href="https://www.latlong.net/" target="_blank">click here</a></label>
                       <div class="col-6">
                         <div class="field">
+                          
                           <!-- <label class="form-label">Latitude</label> -->
                           <p class="control">
                             {{ form.latitude |as_crispy_field}}
@@ -316,5 +319,25 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

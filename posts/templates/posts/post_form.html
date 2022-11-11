@@ -13,7 +13,14 @@
   <form action="{% url 'posts:post_form' %}" method="POST" enctype="multipart/form-data"> 
     {% csrf_token %}
     {{ form.media }}
-    
+    <!-- <div class="form-group">
+      <div type="text" class="form-control" id="exampleFormControlInput1" placeholder="Post title goes here">
+        {{ form.title |as_crispy_field}}
+      </div>
+      <div class="form-control" id="exampleFormControlTextarea1" rows="3">
+        {{ form.content |as_crispy_field}}
+      </div>
+    </div>    -->
     {{ form | crispy }}
 
     <input type="submit" class="btn btn-primary btn-lg" value="Submit" />

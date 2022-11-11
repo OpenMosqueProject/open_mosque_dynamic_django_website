@@ -36,6 +36,9 @@
             </div>
             <div>
                 <br>
+                <a class="btn btn-warning my-2" href="{% url 'posts:post_edit' post.id %}">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                </a>
                 <button class="btn btn-danger my-2"
                     hx-delete="{% url 'posts:delete_post' post.id %}"
                     hx-confirm="Are you sure you want to delete this post?"

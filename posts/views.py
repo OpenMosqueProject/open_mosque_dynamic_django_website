@@ -162,6 +162,19 @@ def post_form(request):
         context = {'form':form}
         return render(request, 'posts/post_form.html', context)
 
+@login_required
+def edit_post_form(request, id): 
+    post = Post.objects.get(pk=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post) 
+        if form.is_valid():
+            form.save()
+            return redirect('posts:home')
+    else:
+        form = PostForm(instance=post)
+        context = {'form':form}
+        return render(request, 'posts/post_form.html', context)
+
 def post_list_view(request):
     posts = Post.objects.filter(type='News').order_by('-published_date').values()
     context = {'posts':posts}
