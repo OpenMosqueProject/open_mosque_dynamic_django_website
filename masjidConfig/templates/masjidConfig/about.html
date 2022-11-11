@@ -4,8 +4,8 @@
 {% block content %}
 
 <div class="px-4 py-5 my-5 text-center">
-  <img class="d-block mx-auto mb-4" src="{{masjid.masjidLogo.url}}" alt="" width="80" height="80">
-  <h1 class="display-5 fw-bold">About {{masjid.masjid_name|title}}</h1>
+  <img class="d-block mx-auto mb-4" src="{{masjid.masjid_Logo.url}}" alt="" width="80" height="80">
+  <h1 class="display-5 fw-bold">About {{masjid.masjid_Name|title}}</h1>
 </div>
 
 <div class="container">
@@ -37,7 +37,7 @@
       <div class="card-body">
         <h5 class="card-title">Address</h5>
         <p class="card-text">
-          {{masjid.masjid_name}}
+          {{masjid.masjid_Name}}
           {% if masjid.address1 %}<br>{{masjid.address1}}{% endif %}
           {% if masjid.town %}<br>{{masjid.town}}{% endif %}
           {% if masjid.city %}<br>{{masjid.city}}{% endif %}

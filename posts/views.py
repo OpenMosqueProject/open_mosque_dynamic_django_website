@@ -44,7 +44,7 @@ def home(request):
     masjid = CentreProfile.load()
 
     #### Variables loaded from centre profile here #####
-    masjid_name = masjid.masjid_name 
+    masjid_name = masjid.masjid_Name 
     city = masjid.city 
     country = masjid.country 
     method = masjid.method
@@ -95,7 +95,7 @@ def month_view(request):
     masjid = CentreProfile.load()
 
     ##### Variables loaded from centre profile here #####
-    masjid_name = masjid.masjid_name 
+    masjid_name = masjid.masjid_Name 
     city = masjid.city 
     country = masjid.country 
     method = masjid.method

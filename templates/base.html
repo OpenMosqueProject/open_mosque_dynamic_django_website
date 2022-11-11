@@ -30,7 +30,7 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <a class="navbar-brand" href="{% url 'posts:home' %}">
-                  <img src="{{masjid_base.masjidLogo.url}}" alt="" width="50" height="50">
+                  <img src="{{masjid_base.masjid_Logo.url}}" alt="" width="50" height="50">
                 </a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
@@ -65,12 +65,12 @@
                     <li><a class="dropdown-item" href="{% url 'masjidConfig:edit_profile' %}">Edit Website Settings</a></li>
                     <li><a class="dropdown-item" href="{% url 'posts:posts_admin' %}">Admin Posts</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="btn btn-danger btn-sm ml-lg-4">Logout</a></li>
+                    <li><a href="{% url 'logout' %}" class="btn btn-danger btn-sm ml-lg-4">Logout</a></li>
                   </ul>
                 </div>
                 {% else %}
                 <form class="d-flex">
-                  <a class="btn btn-primary mx-1">Login</a>
+                  <a href="{% url 'login' %}" class="btn btn-primary mx-1">Login</a>
                 </form>
                 {% endif %}
               </div>

@@ -1,7 +1,7 @@
 from email.policy import default
 from django.db import models
+from django.utils.translation import gettext as trans # for translating text
 
-#from solo.models import SingletonModel
 
 class SingletonModel(models.Model):
 
@@ -35,19 +35,19 @@ MUIS = 11
 UOIF = 12
 DIBT = 13
 PRAYER_CALC_CHOICES = [
-    (SHIA, "Shia Ithna-Ansari"),
-    (UIS, "University of Islamic Sciences, Karachi"),
-    (ISNA, "Islamic Society of North America"),
-    (MWL,"Muslim World League"),
-    (UAU,"Umm Al-Qura University, Makkah"),
-    (EGAU,"Egyptian General Authority of Survey"),
-    (IGUT,"Institute of Geophysics, University of Tehran"),
-    (GR,"Gulf Region"),
-    (KUW,"Kuwait"),
-    (QAT,"Qatar"),
-    (MUIS,"Majlis Ugama Islam Singapura, Singapore"),
-    (UOIF,"Union Organization islamic de France"),
-    (DIBT,"Diyanet İşleri Başkanlığı, Türkiye")
+    (SHIA, trans("Shia Ithna-Ansari")),
+    (UIS, trans("University of Islamic Sciences, Karachi")),
+    (ISNA, trans("Islamic Society of North America")),
+    (MWL,trans("Muslim World League")),
+    (UAU,trans("Umm Al-Qura University, Makkah")),
+    (EGAU,trans("Egyptian General Authority of Survey")),
+    (IGUT,trans("Institute of Geophysics, University of Tehran")),
+    (GR,trans("Gulf Region")),
+    (KUW,trans("Kuwait")),
+    (QAT,trans("Qatar")),
+    (MUIS,trans("Majlis Ugama Islam Singapura, Singapore")),
+    (UOIF,trans("Union Organization islamic de France")),
+    (DIBT,trans("Diyanet İşleri Başkanlığı, Türkiye"))
 ]
 
 GEN = 'general'
@@ -73,51 +73,51 @@ NEAREST_FIFTEEN = "round_to_fifteen"
 NEAREST_THIRTY = "round_to_thirty"   
 
 FAJR_JAMAAH = [
-    (FIVE, "Jamaah is 5 minutes after Iqamah"),
-    (TEN, "Jamaah is 10 minutes after Iqamah"),
-    (FIFTEEN, "Jamaah is 15 minutes after Iqamah"),
-    (NEAREST_FIFTEEN, "Jamaah is rounded to closest 15 minutes after Iqamah"),
-    (NEAREST_THIRTY, "Jamaah is rounded to closest 30 minutes after Iqamah"),
+    (FIVE, trans("Jamaat (Iqamah) is 5 minutes after Azan")),
+    (TEN, trans("Jamaat (Iqamah) is 10 minutes after Azan")),
+    (FIFTEEN, trans("Jamaat (Iqamah) is 15 minutes after Azan")),
+    (NEAREST_FIFTEEN, trans("Jamaat (Iqamah) is rounded to closest 15 minutes after Azan")),
+    (NEAREST_THIRTY, trans("Jamaat (Iqamah) is rounded to closest 30 minutes after Azan")),
 ]
 
 DHUHR_JAMAAH = [
-    (FIVE, "Jamaah is 5 minutes after Iqamah"),
-    (TEN, "Jamaah is 10 minutes after Iqamah"),
-    (FIFTEEN, "Jamaah is 15 minutes after Iqamah"),
-    (NEAREST_FIFTEEN, "Jamaah is rounded to closest 15 minutes after Iqamah"),
-    (NEAREST_THIRTY, "Jamaah is rounded to closest 30 minutes after Iqamah"),
+    (FIVE, trans("Jamaat (Iqamah) is 5 minutes after Azan")),
+    (TEN, trans("Jamaat (Iqamah) is 10 minutes after Azan")),
+    (FIFTEEN, trans("Jamaat (Iqamah) is 15 minutes after Azan")),
+    (NEAREST_FIFTEEN, trans("Jamaat (Iqamah) is rounded to closest 15 minutes after Azan")),
+    (NEAREST_THIRTY, trans("Jamaat (Iqamah) is rounded to closest 30 minutes after Azan")),
 ]
 
 ASR_JAMAAH = [
-    (FIVE, "Jamaah is 5 minutes after Iqamah"),
-    (TEN, "Jamaah is 10 minutes after Iqamah"),
-    (FIFTEEN, "Jamaah is 15 minutes after Iqamah"),
-    (NEAREST_FIFTEEN, "Jamaah is rounded to closest 15 minutes after Iqamah"),
-    (NEAREST_THIRTY, "Jamaah is rounded to closest 30 minutes after Iqamah"),
+    (FIVE, trans("Jamaat (Iqamah) is 5 minutes after Azan")),
+    (TEN, trans("Jamaat (Iqamah) is 10 minutes after Azan")),
+    (FIFTEEN, trans("Jamaat (Iqamah) is 15 minutes after Azan")),
+    (NEAREST_FIFTEEN, trans("Jamaat (Iqamah) is rounded to closest 15 minutes after Azan")),
+    (NEAREST_THIRTY, trans("Jamaat (Iqamah) is rounded to closest 30 minutes after Azan")),
 ]
 
 MAGHRIB_JAMAAH = [
-    (FIVE, "Jamaah is 5 minutes after Iqamah"),
-    (TEN, "Jamaah is 10 minutes after Iqamah"),
-    (FIFTEEN, "Jamaah is 15 minutes after Iqamah"),
-    (NEAREST_FIFTEEN, "Jamaah is rounded to closest 15 minutes after Iqamah"),
-    (NEAREST_THIRTY, "Jamaah is rounded to closest 30 minutes after Iqamah"),
+    (FIVE, trans("Jamaat (Iqamah) is 5 minutes after Azan")),
+    (TEN, trans("Jamaat (Iqamah) is 10 minutes after Azan")),
+    (FIFTEEN, trans("Jamaat (Iqamah) is 15 minutes after Azan")),
+    (NEAREST_FIFTEEN, trans("Jamaat (Iqamah) is rounded to closest 15 minutes after Azan")),
+    (NEAREST_THIRTY, trans("Jamaat (Iqamah) is rounded to closest 30 minutes after Azan")),
 ]
 
 ISHA_JAMAAH = [
-    (FIVE, "Jamaah is 5 minutes after Iqamah"),
-    (TEN, "Jamaah is 10 minutes after Iqamah"),
-    (FIFTEEN, "Jamaah is 15 minutes after Iqamah"),
-    (NEAREST_FIFTEEN, "Jamaah is rounded to closest 15 minutes after Iqamah"),
-    (NEAREST_THIRTY, "Jamaah is rounded to closest 30 minutes after Iqamah"),
+    (FIVE, trans("Jamaat (Iqamah) is 5 minutes after Azan")),
+    (TEN, trans("Jamaat (Iqamah) is 10 minutes after Azan")),
+    (FIFTEEN, trans("Jamaat (Iqamah) is 15 minutes after Azan")),
+    (NEAREST_FIFTEEN, trans("Jamaat (Iqamah) is rounded to closest 15 minutes after Azan")),
+    (NEAREST_THIRTY, trans("Jamaat (Iqamah) is rounded to closest 30 minutes after Azan")),
 ]
 
 # Site settings model
 class CentreProfile(SingletonModel):
     maintenance_mode = models.BooleanField(default=False)
-    masjid_name = models.CharField(max_length=255, default='Open Mosque Project')
-    masjidLogo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
-    masjidPhoto = models.ImageField(upload_to='images/', blank=True)
+    masjid_Name = models.CharField(max_length=255, default='Open Mosque Project')
+    masjid_Logo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
+    masjid_Photo = models.ImageField(upload_to='images/', blank=True)
     about = models.TextField(max_length=2000, blank=True)
     address1 = models.CharField(max_length=255, blank=True)
     town = models.CharField(max_length=255, blank=True)
@@ -148,10 +148,10 @@ class CentreProfile(SingletonModel):
     what3words = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"{self.masjid_name} Site Configuration"
+        return trans(f"{self.masjid_Name} Site Configuration")
 
     class Meta:
-        verbose_name = "Site Configuration"
+        verbose_name = trans("Site Configuration")
     
     """
     Adjustments we have not currently added
