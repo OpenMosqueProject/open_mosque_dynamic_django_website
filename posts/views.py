@@ -183,6 +183,7 @@ def delete_post(request, id):
 @login_required #@require_http_methods(['UPDATE'])
 def hide_post_toggle(request, id):
     post = Post.objects.get(id=id)
+    # print(f"Post ID: {post.id}")
     if not post.published:
         post.published = True
         post.save()
