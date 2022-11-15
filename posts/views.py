@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.utils.safestring import SafeString
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -164,16 +164,16 @@ def post_form(request):
 
 @login_required
 def edit_post_form(request, id): 
-    post = Post.objects.get(pk=id)
+    post = get_object_or_404(Post, pk=id)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post) 
         if form.is_valid():
             form.save()
-            return redirect('posts:home')
+            return redirect('posts:home') # HttpResponseRedirect(reverse('posts:post_view', kwargs={'id':id}))
     else:
         form = PostForm(instance=post)
         context = {'form':form}
-        return render(request, 'posts/post_form.html', context)
+        return render(request, 'posts/post_edit_form.html', context)
 
 def post_list_view(request):
     posts = Post.objects.filter(type='News').order_by('-published_date').values()
