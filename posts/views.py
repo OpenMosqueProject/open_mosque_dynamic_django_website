@@ -165,14 +165,15 @@ def post_form(request):
 @login_required
 def edit_post_form(request, id): 
     post = get_object_or_404(Post, pk=id)
-    if request.method == 'POST':
+    if request.method == "POST":
+        print("post")
         form = PostForm(request.POST, request.FILES, instance=post) 
         if form.is_valid():
             form.save()
-            return redirect('posts:home') # HttpResponseRedirect(reverse('posts:post_view', kwargs={'id':id}))
+            return HttpResponseRedirect(reverse('posts:post_view', kwargs={'id':id}))
     else:
         form = PostForm(instance=post)
-        context = {'form':form}
+        context = {'form':form, 'post':post}
         return render(request, 'posts/post_edit_form.html', context)
 
 def post_list_view(request):
