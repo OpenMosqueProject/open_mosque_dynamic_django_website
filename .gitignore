@@ -154,3 +154,4 @@ cython_debug/
 
 ckeditor/
 /staticfiles
+/mediafiles
