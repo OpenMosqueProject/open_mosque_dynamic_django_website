@@ -274,18 +274,11 @@
                         <div class="field">
                           <!-- <label class="form-label">Main Colour</label> -->
                           <p class="control">
-                            {{ form.mainColour |as_crispy_field}}
+                            {{ form.theme_choice |as_crispy_field}}
                           </p>
                         </div>
                       </div>
-                      <div class="col-6">
-                        <div class="field">
-                          <!-- <label class="form-label">Accent Colour</label> -->
-                          <p class="control">
-                            {{ form.accentColour |as_crispy_field}}
-                          </p>
-                        </div>
-                      </div>
+                      
                     </div>
                     <div class="field">
                       {% if masjid.masjid_Photo %}

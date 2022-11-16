@@ -112,6 +112,10 @@ ISHA_JAMAAH = [
     (NEAREST_THIRTY, trans("Jamaat (Iqamah) is rounded to closest 30 minutes after Azan")),
 ]
 
+THEME_CHOICES = [
+    (0, "default theme"),
+    (1, "Dark Theme")
+]
 # Site settings model
 class CentreProfile(SingletonModel):
     maintenance_mode = models.BooleanField(default=False)
@@ -134,8 +138,7 @@ class CentreProfile(SingletonModel):
     asr_jamaah_minutes = models.CharField(max_length=255, choices=ASR_JAMAAH, blank=True)
     maghrib_jamaah_minutes = models.CharField(max_length=255, choices=MAGHRIB_JAMAAH, blank=True)
     isha_jamaah_minutes = models.CharField(max_length=255, choices=ISHA_JAMAAH, blank=True)
-    mainColour = models.CharField(max_length=7, default='#0d6efd')
-    accentColour = models.CharField(max_length=7, default='#adb5bd')
+    theme_choice = models.CharField(max_length=255, choices=THEME_CHOICES, blank=True)
     facebook = models.CharField(max_length=255, blank=True)
     instagram = models.CharField(max_length=255, blank=True)
     youtube = models.CharField(max_length=255, blank=True)

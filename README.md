@@ -31,7 +31,7 @@ In order to overcome this, we need to comment out references to queries of the s
 These exist in both `views.py` files in the `posts` and `masjidConfig` apps. They will be commented for you to see. Once you have created the table for the singleton model, `CentreProfile` by running the commands, `python manage.py makemigrations` and `python manage.py migrate`, you can then uncomment the queries in reference.
 
 - on line 10 of masjidConfig views.py comment out --> masjid = CentreProfile.load()
-- lastly again in posts views.py comment out the variables on lines 44-60 & 95-111
+- lastly again in posts views.py comment out the variables on lines 43-60
 
 Unfortunately, this issue crops up again if you are making changes to the masjidConfig model so do the above again
 

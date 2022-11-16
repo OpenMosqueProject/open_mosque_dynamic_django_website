@@ -1,14 +1,11 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from django.utils.safestring import SafeString
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
-from django.db.models import Case, Value, When
 from django.views.generic import View 
 from django.template.loader import get_template
 
-import tabulate
 from .utils import render_to_pdf
 
 import requests, json, datetime
