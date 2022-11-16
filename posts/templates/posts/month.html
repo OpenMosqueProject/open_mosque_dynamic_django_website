@@ -6,8 +6,8 @@
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="{{masjid_base.masjid_Logo.url}}" alt="" width="80" height="80">
     <h1 class="display-5 fw-bold">{{masjid_base.masjid_Name|title}} Monthly Prayer Times</h1>
-    <!-- <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Prayer times for the month</p>
+    <div>
+      <!-- <p class="lead mb-4">Prayer times for the month</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -20,11 +20,11 @@
             </ul>
           </div>
         <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Select</button>
-        <button class="btn btn-primary btn-lg px-4 gap-3"
-          onclick="printFunction()"><i class="fa-solid fa-print"></i></button>
         
-      </div>
-    </div> -->
+        
+      </div> -->
+      <a href="{% url 'posts:pdf' %}" class="btn btn-primary btn-lg px-4 gap-3"><i class="fa-solid fa-print"></i></a>
+    </div>
   </div>
 
   <div id="mytable"></div>

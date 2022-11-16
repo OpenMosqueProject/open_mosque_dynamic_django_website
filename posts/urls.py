@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from . import views
-
+from .views import get_month_tbl
 app_name = 'posts'
 
 urlpatterns = [
@@ -14,4 +14,5 @@ urlpatterns = [
     path('post/<int:id>/delete/', views.delete_post, name='delete_post'),
     path('post/<int:id>/toggle', views.hide_post_toggle, name='post_toggle'),
     path('post/edit/<int:id>/', views.edit_post_form, name='post_edit'),
+    path('pdf', views.GeneratePdf.as_view(), name="pdf"),
 ]

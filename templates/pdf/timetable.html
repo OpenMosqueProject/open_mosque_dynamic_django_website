@@ -1,0 +1,98 @@
+{% load static %}
+{% load masjid_tags %}
+{% get_masjid as masjid_base %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+
+        .title span {
+            color: #007cae;
+        }
+
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333;
+            /* old IE */
+            background-color: #fff;
+            /* Modern Browsers */
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            }
+            th, td {
+            padding: 1px;
+            border: 1px solid #dddddd;
+            text-align: center;
+            }
+            
+            tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+    </style>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <img class="" src="{{masjid_base.masjid_Logo.path}}" alt="" width="80" height="80">
+            <p class='title'>{{masjid_base.masjid_Name|title}} Monthly Prayer Times</p>
+        </div>
+        <div>
+            <hr class='hrItem' />
+            <!-- <div class='details'> Bill to: <br /> Amount: <br /> Date:</div>-->
+        </div>
+        <!-- <div id="mytable"></div> -->
+        <table class="">
+            <thead class="">
+                <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col" colspan="2">Fajr</th>
+                    <th scope="col">Sunrise</th>
+                    <th scope="col" colspan="2">Dhuhr</th>
+                    <th scope="col" colspan="2">Asr</th>
+                    <th scope="col" colspan="2">Maghrib</th>
+                    <th scope="col" colspan="2">Isha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr><td> {{d.day_no}} </td><td>{{d.fajr}}</td><td>{{d.fajr_j}}</td><td>{{d.sunrise}}</td><td>{{d.dhuhr}}</td><td>{{d.dhuhr_j}}</td><td>{{d.asr}}</td><td>{{d.asr_j}}</td><td>{{d.maghrib}}</td><td>{{d.maghrib_j}}</td><td>{{d.isha}}</td><td>{{d.isha_j}}</td></tr>
+                {% endfor %}
+            </tbody>
+    </div>
+    
+</body>
+
+</html>

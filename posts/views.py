@@ -1,11 +1,15 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.utils.safestring import SafeString
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.db.models import Case, Value, When
+from django.views.generic import View 
+from django.template.loader import get_template
 
+import tabulate
+from .utils import render_to_pdf
 
 import requests, json, datetime
 from .forms import PostForm
@@ -39,10 +43,8 @@ def jamaah_calculator(azaanTime, minutesAfter):
 # NOTE:
 # Ternary statements below solves minutes being displayed as single digit eg
 # 17:05 displaying as 17:5 or 20:00 displaying as 20:0
-
-def home(request):
+def get_masjid_data():
     masjid = CentreProfile.load()
-
     #### Variables loaded from centre profile here #####
     masjid_name = masjid.masjid_Name 
     city = masjid.city 
@@ -58,6 +60,11 @@ def home(request):
     asr_jamaah_minutes = masjid.asr_jamaah_minutes
     maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
     isha_jamaah_minutes = masjid.isha_jamaah_minutes
+    return masjid, masjid_name,city, country, method, longitude, latitude, current_time, month, year, fajr_jam_min,dh_jam_min, asr_jamaah_minutes, maghrib_jamaah_minutes,isha_jamaah_minutes
+
+def home(request):
+    # Collecting masjid data from class
+    masjid, masjid_name,city, country, method, longitude, latitude, current_time, month, year, fajr_jam_min,dh_jam_min, asr_jamaah_minutes, maghrib_jamaah_minutes,isha_jamaah_minutes = get_masjid_data()
     ###############################################
     posts = Post.objects.all().filter(published=True)
 
@@ -91,24 +98,9 @@ def home(request):
     
     return render(request, 'posts/home.html', context)
 
-def month_view(request):
-    masjid = CentreProfile.load()
-
-    ##### Variables loaded from centre profile here #####
-    masjid_name = masjid.masjid_Name 
-    city = masjid.city 
-    country = masjid.country 
-    method = masjid.method
-    longitude = masjid.longitude
-    latitude = masjid.latitude
-    current_time = datetime.datetime.now()
-    month = current_time.month
-    year = current_time.year
-    fajr_jam_min = masjid.fajr_jamaah_minutes
-    dh_jam_min = masjid.dhuhr_jamaah_minutes
-    asr_jamaah_minutes = masjid.asr_jamaah_minutes
-    maghrib_jamaah_minutes = masjid.maghrib_jamaah_minutes
-    isha_jamaah_minutes = masjid.isha_jamaah_minutes
+def get_month_tbl():
+    # Collecting masjid data from class
+    masjid, masjid_name,city, country, method, longitude, latitude, current_time, month, year, fajr_jam_min,dh_jam_min, asr_jamaah_minutes, maghrib_jamaah_minutes,isha_jamaah_minutes = get_masjid_data()
     ###############################################
     month_api = requests.get(f'http://api.aladhan.com/v1/calendar?latitude={latitude}&longitude={longitude}&country={country}&method={method}&month={month}&year={year}')
     data = month_api.json()
@@ -142,7 +134,10 @@ def month_view(request):
         day_no = row["date"]["gregorian"]["day"]
         day_ab = row["date"]["gregorian"]["weekday"]
         month_data.append({'fajr':fajr,'fajr_j':fajr_j,'sunrise':sunrise, 'dhuhr':dhuhr, 'dhuhr_j':dhuhr_j,'asr':asr,'asr_j':asr_j,'maghrib':maghrib,'maghrib_j':maghrib_j, 'isha':isha,'isha_j':isha_j,'month':mon, 'date':date, 'weekday':weekday,'day_no':day_no, 'day_ab':day_ab})
-    
+    return month_data
+
+def month_view(request):
+    month_data = get_month_tbl()
     context = {'d':json.dumps(month_data)}
     return render(request, 'posts/month.html', context)
 
@@ -206,3 +201,24 @@ def hide_post_toggle(request, id):
     
     #post = Post.objects.get(id=id)
     return render(request, 'posts/partials/single_post.html', {'post': post})
+
+class GeneratePdf(View): 
+    def get(self, request, *args, **kwargs): 
+        month_data = get_month_tbl()
+        template = get_template('pdf/timetable.html')
+        current_time = datetime.datetime.now()
+        month = current_time.month
+        year = current_time.year 
+        context = {'data':month_data} 
+        html = template.render(context) 
+        pdf = render_to_pdf('pdf/timetable.html', context) 
+        if pdf: 
+            response = HttpResponse(pdf, content_type='application/pdf') 
+            filename = f"Timetable_{month}_{year}.pdf" 
+            content = "inline; filename='%s'" %(filename) 
+            download = request.GET.get("download") 
+            if download: 
+                content = "attachment; filename='%s'" %(filename) 
+            response['Content-Disposition'] = content 
+            return response 
+        return HttpResponse("Not found")
