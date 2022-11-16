@@ -42,8 +42,8 @@ For this project I have used the excellent https://aladhan.com/prayer-times-api.
 
 ### Attribution
 resources I have used to put together this template
-- https://colorlib.com/wp/template/carousel-07/ 
-- https://colorlib.com/wp/template/carousel-19/
-- Blue mosque image - https://commons.wikimedia.org/wiki/File:Blue_Mosque_2017.jpg
-- Latitude, Longitude finder https://www.latlong.net/
-- https://www.embedgooglemap.net/
+- Homepage Carousel - https://colorlib.com/wp/template/carousel-07/ 
+- Default Post Blue mosque image - https://commons.wikimedia.org/wiki/File:Blue_Mosque_2017.jpg
+- Default Homepage Arial view of Blue Mosque from https://theistanbulinsider.com/the-blue-mosque-one-of-the-most-famous-misunderstandings/
+- Latitude, Longitude finder - https://www.latlong.net/
+- About page Google maps embed - https://www.embedgooglemap.net/

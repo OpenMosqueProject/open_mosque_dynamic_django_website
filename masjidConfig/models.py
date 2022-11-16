@@ -1,6 +1,6 @@
 from email.policy import default
 from django.db import models
-from django.utils.translation import gettext as trans # for translating text
+from django.utils.translation import gettext_lazy as trans # for translating text
 
 
 class SingletonModel(models.Model):
@@ -115,7 +115,7 @@ ISHA_JAMAAH = [
 # Site settings model
 class CentreProfile(SingletonModel):
     maintenance_mode = models.BooleanField(default=False)
-    masjid_Name = models.CharField(max_length=255, default='Open Mosque Project')
+    masjid_Name = models.CharField(trans("Name of mosque"), max_length=255, default='Open Mosque Project')
     masjid_Logo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
     masjid_Photo = models.ImageField(upload_to='images/', blank=True)
     about = models.TextField(max_length=2000, blank=True)

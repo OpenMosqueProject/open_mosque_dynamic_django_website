@@ -166,7 +166,6 @@ def post_form(request):
 def edit_post_form(request, id): 
     post = get_object_or_404(Post, pk=id)
     if request.method == "POST":
-        print("post")
         form = PostForm(request.POST, request.FILES, instance=post) 
         if form.is_valid():
             form.save()
