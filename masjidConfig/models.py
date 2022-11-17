@@ -116,7 +116,8 @@ THEME_CHOICES = [
     ("default", "Default Theme"),
     ("dark", "Dark Theme"),
     ("yeti", "Yeti Theme"),
-    ("vapor", "Vapor Theme")
+    ("vapor", "Vapor Theme"),
+    ("retro", "Retro Theme")
 ]
 # Site settings model
 class CentreProfile(SingletonModel):

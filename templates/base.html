@@ -14,6 +14,8 @@
           <link href="{% sass_src 'theme_yeti.scss' %}" rel="stylesheet" type="text/css" />
         {% elif masjid_base.theme_choice == "vapor" %}
           <link href="{% sass_src 'theme_vapor.scss' %}" rel="stylesheet" type="text/css" />
+        {% elif masjid_base.theme_choice == "retro" %}
+          <link href="{% sass_src 'theme_retro.scss' %}" rel="stylesheet" type="text/css" />
         {% else %}
           <link href="{% sass_src 'theme.scss' %}" rel="stylesheet" type="text/css" />
         {% endif %}
