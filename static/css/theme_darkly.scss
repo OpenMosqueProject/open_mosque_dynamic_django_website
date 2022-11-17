@@ -1,0 +1,33 @@
+$blue: #375a7f;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red:#e74c3c;
+$orange:#fd7e14;
+$yellow:#f39c12;
+$green:#00bc8c;
+$teal:#20c997;
+$cyan:#3498db;
+$black:#000;
+$white:#fff;
+$gray:#888;
+$primary:#375a7f;
+$secondary:#444;
+$success:#00bc8c;
+$info:#3498db;
+$warning:#f39c12;
+$danger:#e74c3c;
+$light:#adb5bd;
+$dark:#303030;
+
+
+@import 'daily_prayer';
+@import 'owl.carousel.min';
+@import 'owl.theme.default.min';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min');
+@import 'daily_prayer';
+
+@import './scss/bootstrap';
+
+@import 'style';
+

@@ -6,7 +6,17 @@
 <html>
     <head>
         <!-- CSS only -->
-        <link href="{% sass_src 'theme.scss' %}" rel="stylesheet" type="text/css" />
+        {% if masjid_base.theme_choice == "default" %}
+          <link href="{% sass_src 'theme.scss' %}" rel="stylesheet" type="text/css" />
+        {% elif masjid_base.theme_choice == "dark" %}
+          <link href="{% sass_src 'theme_darkly.scss' %}" rel="stylesheet" type="text/css" />
+        {% elif masjid_base.theme_choice == "yeti" %}
+          <link href="{% sass_src 'theme_yeti.scss' %}" rel="stylesheet" type="text/css" />
+        {% elif masjid_base.theme_choice == "vapor" %}
+          <link href="{% sass_src 'theme_vapor.scss' %}" rel="stylesheet" type="text/css" />
+        {% else %}
+          <link href="{% sass_src 'theme.scss' %}" rel="stylesheet" type="text/css" />
+        {% endif %}
         <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
     </head>
 
@@ -87,4 +97,5 @@
     <script src="{% static 'js/main.js' %}"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
 </html>

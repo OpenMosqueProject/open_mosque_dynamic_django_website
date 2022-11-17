@@ -8,8 +8,8 @@ class MasjidEditForm(forms.ModelForm):
         model = CentreProfile
         fields = '__all__'
         widgets = {
-            'mainColour': TextInput(attrs={'type': 'color'}),
-            'accentColour': TextInput(attrs={'type': 'color'}),
+            # 'mainColour': TextInput(attrs={'type': 'color'}),
+            # 'accentColour': TextInput(attrs={'type': 'color'}),
             'email': EmailInput(attrs={
                 'class':'input is-primary',
                 'type': 'email',

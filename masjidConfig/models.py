@@ -113,8 +113,10 @@ ISHA_JAMAAH = [
 ]
 
 THEME_CHOICES = [
-    (0, "default theme"),
-    (1, "Dark Theme")
+    ("default", "Default Theme"),
+    ("dark", "Dark Theme"),
+    ("yeti", "Yeti Theme"),
+    ("vapor", "Vapor Theme")
 ]
 # Site settings model
 class CentreProfile(SingletonModel):
@@ -138,7 +140,7 @@ class CentreProfile(SingletonModel):
     asr_jamaah_minutes = models.CharField(max_length=255, choices=ASR_JAMAAH, blank=True)
     maghrib_jamaah_minutes = models.CharField(max_length=255, choices=MAGHRIB_JAMAAH, blank=True)
     isha_jamaah_minutes = models.CharField(max_length=255, choices=ISHA_JAMAAH, blank=True)
-    theme_choice = models.CharField(max_length=255, choices=THEME_CHOICES, blank=True)
+    theme_choice = models.CharField(max_length=255, choices=THEME_CHOICES, default="default")
     facebook = models.CharField(max_length=255, blank=True)
     instagram = models.CharField(max_length=255, blank=True)
     youtube = models.CharField(max_length=255, blank=True)

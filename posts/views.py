@@ -64,7 +64,7 @@ def home(request):
     masjid, masjid_name,city, country, method, longitude, latitude, current_time, month, year, fajr_jam_min,dh_jam_min, asr_jamaah_minutes, maghrib_jamaah_minutes,isha_jamaah_minutes = get_masjid_data()
     ###############################################
     posts = Post.objects.all().filter(published=True)
-
+    
     api_data = requests.get(f'http://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}')
     d = api_data.json()
     fajr = d['data']['timings']['Fajr']
