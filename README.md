@@ -5,8 +5,8 @@ The website will provide mosques auto-generated prayer times (with adjustable ja
 The idea is to keep this open source so that others can take and build on it. 
 It would be great to grow an open community with ideas and know-how to help develop this for all mosques in the world.
 
-The project is being developed using a Django backend. We are still in early stages and needs people with the skills to help make this project a reality insha'Allah 🤲.
-
+The project is being developed using a Django backend. We have now released the first version of the app but are still looking for people with the skills to help make this project better insha'Allah 🤲.
+Join us on our Discord server and share your ideas. 🗨️ https://discord.gg/CjX6UaBQn8 💬
 
 ## 🔧 Setup 🔧
 
