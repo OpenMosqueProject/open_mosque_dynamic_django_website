@@ -47,3 +47,4 @@ resources I have used to put together this template
 - Default Homepage Arial view of Blue Mosque from https://theistanbulinsider.com/the-blue-mosque-one-of-the-most-famous-misunderstandings/
 - Latitude, Longitude finder - https://www.latlong.net/
 - About page Google maps embed - https://www.embedgooglemap.net/
+- Theme ideas taken from https://bootswatch.com/
