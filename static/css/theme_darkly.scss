@@ -11,6 +11,16 @@ $cyan:#3498db;
 $black:#000;
 $white:#fff;
 $gray:#888;
+$bs-gray-dark:#303030;
+$bs-gray-100:#f8f9fa;
+$bs-gray-200:#ebebeb;
+$bs-gray-300:#dee2e6;
+$bs-gray-400:#ced4da;
+$bs-gray-500:#adb5bd;
+$bs-gray-600:#888;
+$bs-gray-700:#444;
+$bs-gray-800:#303030;
+$bs-gray-900:#222;
 $primary:#375a7f;
 $secondary:#444;
 $success:#00bc8c;
@@ -31,3 +41,7 @@ $dark:#303030;
 
 @import 'style';
 
+$link-color:#00bc8c;
+$link-hover-color:#009670;
+$code-color:#e83e8c;
+$highlight-bg:#fdebd0;
