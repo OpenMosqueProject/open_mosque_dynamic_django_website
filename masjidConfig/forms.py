@@ -8,8 +8,7 @@ class MasjidEditForm(forms.ModelForm):
         model = CentreProfile
         fields = '__all__'
         widgets = {
-            # 'mainColour': TextInput(attrs={'type': 'color'}),
-            # 'accentColour': TextInput(attrs={'type': 'color'}),
+            
             'email': EmailInput(attrs={
                 'class':'input is-primary',
                 'type': 'email',
@@ -20,7 +19,7 @@ class MasjidEditForm(forms.ModelForm):
     maintenance_mode = models.BooleanField(default=False)
     masjid_Name = models.CharField(max_length=255, default='Open Mosque Project')
     masjid_Logo = models.ImageField(upload_to='images/', default='images/gsm_logo.png')
-    
+    theme_choice = models.CharField(max_length=255, choices=THEME_CHOICES, default="default")
     city = models.CharField(max_length=255, default='London')
     country = models.CharField(max_length=255, default='GB')    
     method = models.IntegerField(max_length=2, choices=PRAYER_CALC_CHOICES, default=3)

@@ -1,6 +1,6 @@
 from email.policy import default
 from django.db import models
-from django.utils.translation import gettext_lazy as trans # for translating text
+from django.utils.translation import gettext as trans # for translating text
 
 
 class SingletonModel(models.Model):
