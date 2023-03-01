@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.views.generic import View 
 from django.template.loader import get_template
+from functools import lru_cache
 
 from .utils import render_to_pdf
 
@@ -40,6 +41,7 @@ def jamaah_calculator(azaanTime, minutesAfter):
 # NOTE:
 # Ternary statements below solves minutes being displayed as single digit eg
 # 17:05 displaying as 17:5 or 20:00 displaying as 20:0
+@lru_cache(maxsize=1)
 def get_masjid_data():
     masjid = CentreProfile.load()
     #### Variables loaded from centre profile here #####

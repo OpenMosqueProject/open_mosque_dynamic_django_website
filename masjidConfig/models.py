@@ -147,6 +147,7 @@ class CentreProfile(SingletonModel):
     youtube = models.CharField(max_length=255, blank=True)
     telegram = models.CharField(max_length=255, blank=True)
     twitter = models.CharField(max_length=255, blank=True)
+    tiktok = models.CharField(max_length=255, blank=True)
     imam = models.CharField(max_length=255, blank=True)
     landline = models.CharField(max_length=255, blank=True)
     mobile = models.CharField(max_length=255, blank=True)

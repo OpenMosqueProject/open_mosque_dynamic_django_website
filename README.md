@@ -25,16 +25,6 @@ Before trying to run the server
 
 - *if* new dependencies have been added run `pip freeze > requirements.txt`
 
-### *Current bug* 🤷‍♂️
-There is an issue with the fact that Django currently does not have a solution to creating a singleton model. This means that when first running the `makemigrations` command, you will come across the error that `django.db.utils.OperationalError: no such table: masjidConfig_centreprofile`.
-In order to overcome this, we need to comment out references to queries of the singleton object. 
-These exist in both `views.py` files in the `posts` and `masjidConfig` apps. They will be commented for you to see. Once you have created the table for the singleton model, `CentreProfile` by running the commands, `python manage.py makemigrations` and `python manage.py migrate`, you can then uncomment the queries in reference.
-
-- on line 10 of masjidConfig views.py comment out --> masjid = CentreProfile.load()
-- lastly again in posts views.py comment out the variables on lines 43-60
-
-Unfortunately, this issue crops up again if you are making changes to the masjidConfig model so do the above again
-
 
 ### Other info
 There are 2 great APIs to that I have used in projects to generate prayer times. Most mosques in London use https://www.londonprayertimes.com/api/. You may wish to consider that if you are from the UK.
