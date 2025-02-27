@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+    <!-- Include Quill stylesheet -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <!-- Include Quill library -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+{% endblock %}
+
+{% block title %}Edit Post{% endblock %}
+{% block content %}
+
+{% if form.errors %}
+    <div class="alert alert-error">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<h1 class="text-2xl font-bold mb-4">Edit Post</h1>
+<hr class="my-4">
+
+<form action="{% url 'posts:post_edit' post.id %}" method="POST" enctype="multipart/form-data" class="space-y-4">
+    {% csrf_token %}
+    {{ form.media }}
+
+    <!-- Title Field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Title</span>
+        </label>
+        {{ form.title|add_class:"input input-bordered w-full" }}
+        {% if form.title.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.title.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Content Field Rich text field -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Content</span>
+      </label>
+      <div id="editor" class="quill-editor">{{ form.content.value|safe }}</div>
+      <textarea id="content" name="content" style="display: none;">{{ form.content.value|safe }}</textarea>
+        {% if form.content.errors %}
+          <div class="text-error text-sm mt-1">
+              {{ form.content.errors }}
+          </div>
+        {% endif %}
+    </div>
+
+    <!-- Image Field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Image</span>
+        </label>
+        {{ form.image|add_class:"file-input file-input-bordered w-full" }}
+        {% if form.image.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.image.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Published Date Field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Published Date</span>
+        </label>
+        {{ form.published_date|add_class:"input input-bordered w-full" }}
+        {% if form.published_date.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.published_date.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Type Field -->
+    <div class="form-control">
+      <label class="label">
+          <span class="label-text">Type</span>
+      </label>
+      {{ form.type|add_class:"select select-bordered w-full" }}
+      {% if form.type.errors %}
+          <div class="text-error text-sm mt-1">
+              {{ form.type.errors }}
+          </div>
+      {% endif %}
+    </div>
+
+    <!-- Updated Date Field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Updated Date</span>
+        </label>
+        {{ form.updated_date|add_class:"input input-bordered w-full" }}
+        {% if form.updated_date.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.updated_date.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Published Checkbox -->
+    <div class="form-control">
+        <label class="label cursor-pointer">
+            <span class="label-text">Published</span>
+            {{ form.published|add_class:"checkbox checkbox-primary" }}
+            {% if form.published.errors %}
+              <div class="text-error text-sm mt-1">
+                  {{ form.published.errors }}
+              </div>
+            {% endif %}
+        </label>
+    </div>
+    
+    <!-- Submit Button -->
+    <div class="form-control">
+        <input type="submit" class="btn btn-primary w-full" value="Submit" />
+    </div>
+</form>
+
+<script src="{% static 'js/quill_editor_settings.js' %}"></script>
+{% endblock %}

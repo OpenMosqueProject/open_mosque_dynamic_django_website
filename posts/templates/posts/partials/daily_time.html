@@ -1,0 +1,102 @@
+{% load static %}
+<div>
+  <div class="pl-4 pb-2">
+    <div class="join items-center place-self-center">
+      <small class="join-item pr-1">{{today}}</small> 
+      <img class="join-item" src="https://img.icons8.com/color/24/000000/kaaba.png" />
+      <small class="join-item pl-1">{{hijri}}</small>
+    </div>
+  </div>
+
+  <!-- Fajr Card -->
+  <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+    <!-- Left Side: Image -->
+    <figure class="max-w-[50px] max-h-[50px] bg-yellow-400 flex items-center justify-center">
+      <img src="{% static 'images/sunrise.png' %}" alt="fajr" class="w-full h-full object-cover" />
+    </figure>
+
+    <!-- Right Side: Text Content -->
+    <div class="card-body pl-2 pt-1 leading-none">
+          
+      <span class="flex justify-between">
+        <span class="text-sm font-bold">Fajr: <span id="T_Fajr text-xs">{{fajr}}</span></span>
+        
+        <span class="text-xs">
+          <img 
+          width="16" 
+          src="{% static 'images/sunrise_x16.png' %}" 
+          alt="Sunrise" 
+          class="inline-block" 
+        />
+        {{ sunrise }}</span>
+      </span>
+      <span>Jamaah: {{ fajr_j }}</span>
+          
+    </div>
+  </div>
+
+  <!-- Dhuhr Card -->
+  <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+    <!-- Left Side: Image -->
+    <figure class="max-w-[50px] max-h-[50px] bg-blue-400 flex items-center justify-center">
+      <img src="{% static 'images/sun.png' %}" alt="fajr" class="w-full h-full object-cover" />
+    </figure>
+
+    <!-- Right Side: Text Content -->
+    <div class="card-body pl-2 pt-1 leading-none">
+          
+      <span class="text-sm font-bold">Dhuhr:<span id="T_Fajr text-xs">{{dhuhr}}</span></span>
+      <span>Jamaah: {{ dhuhr_j }}</span>
+          
+    </div>
+  </div>
+
+    <!-- Asr card -->
+    <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+      <!-- Left Side: Image -->
+      <figure class="max-w-[50px] max-h-[50px] bg-[#ff7f64] flex items-center justify-center">
+        <img src="{% static 'images/sunset.png' %}" alt="fajr" class="w-full h-full object-cover" />
+      </figure>
+  
+      <!-- Right Side: Text Content -->
+      <div class="card-body pl-2 pt-1 leading-none">
+            
+        <span class="text-sm font-bold">Asr:<span id="T_Fajr text-xs">{{ asr }}</span></span>
+        <span>Jamaah: {{ asr_j }}</span>
+            
+      </div>
+    </div>
+  
+    <!-- maghrib card -->
+    <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+      <!-- Left Side: Image -->
+      <figure class="max-w-[50px] max-h-[50px] bg-[#2980b9] flex items-center justify-center">
+        <img src="{% static 'images/moonrise.png' %}" alt="fajr" class="w-full h-full object-cover" />
+      </figure>
+  
+      <!-- Right Side: Text Content -->
+      <div class="card-body pl-2 pt-1 leading-none">
+            
+        <span class="text-sm font-bold">Maghrib:<span id="T_Fajr text-xs">{{ maghrib }}</span></span>
+        <span>Jamaah: {{ maghrib_j }}</span>
+            
+      </div>
+    </div>
+
+    <!-- Isha card -->
+    <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+      <!-- Left Side: Image -->
+      <figure class="max-w-[50px] max-h-[50px] bg-[#99a3a4] flex items-center justify-center">
+        <img src="{% static 'images/night.png' %}" alt="isha" class="w-full h-full object-cover" />
+      </figure>
+  
+      <!-- Right Side: Text Content -->
+      <div class="card-body pl-2 pt-1 leading-none">
+            
+        <span class="text-sm font-bold">Isha:<span id="T_Fajr text-xs">{{ isha }}</span></span>
+        <span>Jamaah: {{ isha_j }}</span>
+            
+      </div>
+    </div>
+
+</div>

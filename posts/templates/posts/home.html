@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="grid grid-cols-3 gap-4 p-4">
+    <div class="col-span-1">
+        {% include 'posts/partials/daily_time.html' %}
+    </div>
+    <div class="col-span-2">
+        {% if masjid.masjid_Photo %}
+            <img src="{{masjid.masjid_Photo.url}}" class="overflow-hidden">
+        {% else %}
+            <img src="https://theistanbulinsider.com/wp-content/uploads/2020/03/blue-mosque-aerial.jpg" class="overflow-hidden">
+            <p><small>Aerial view of the Blue Mosque – <a href="https://theistanbulinsider.com/the-blue-mosque-one-of-the-most-famous-misunderstandings/">© The Istanbul Insider</a></small></p>
+        {% endif %}
+    </div>
+</div>
+
+
+<!-- ***************************************************************************** 
+    This is the slider section on the page. Populate with posts from the posts app
+    Images are best 1000x667 or ***
+    ***************************************************************************** -->
+
+    <div class="container">
+        {% if posts %}<h1 class="text-xl">News/Events</h1>{% endif %}
+        
+            <!-- Carousel Container -->
+            <div class="carousel w-full space-x-4 px-4" id="auto-carousel">
+                {% for post in posts %}
+                <!-- Carousel Item -->
+                <div class="carousel-item flex-shrink-0 w-96" id="slide{{ forloop.counter }}">
+                    <!-- Card Container -->
+                    <div class="card w-full bg-base-100 shadow-xl">
+                        <!-- card image -->
+                        <figure>
+                            <img
+                              src="{{ post.image.url }}"
+                              href="{{ post.get_absolute_url }}"/>
+                        </figure>
+                        <!-- card body -->
+                        <div class="card-body p-4">
+                            <h2 class="card-title text-xl"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+                            <div class="grid grid-cols-2 place-content-around gap-4">
+                                <div class="text-sm">
+                                    <span class="day">{{post.published_date|date:"d"}}</span>
+                                    <span class="mos">{{post.published_date|date:"M"}}</span>
+                                    <span class="yr">{{post.published_date|date:"Y"}}</span>
+                                </div>  
+                                <div class="text-sm place-self-end">{{post.type}}</div>
+
+                            </div>
+                            
+                          
+                          <p>{{post.content|safe|truncatewords:10}}</p>
+                          <div class="card-actions justify-end">
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+	const carousel = document.getElementById('auto-carousel');
+	const items = carousel.querySelectorAll('.carousel-item');
+	let intervalId;
+	let currentSlide = 0;
+	const totalSlides = {{ posts|length }};
+
+	// Calculate the width of one carousel item including margin
+	const itemWidth = items[0].offsetWidth; // This will be 384px (w-96)
+	const spacing = 16; // space-x-4 adds 16px between items
+
+	function scrollNext() {
+		currentSlide = (currentSlide + 1) % totalSlides;
+		carousel.scrollTo({
+			left: (itemWidth + spacing) * currentSlide, // Scroll distance includes spacing
+			behavior: 'smooth'
+		});
+	}
+
+	function scrollPrev() {
+		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+		carousel.scrollTo({
+			left: (itemWidth + spacing) * currentSlide,
+			behavior: 'smooth'
+		});
+	}
+
+	// Auto-scroll functionality
+	function startAutoScroll() {
+		intervalId = setInterval(scrollNext, 3000); // Scroll every 3 seconds
+	}
+
+	// Pause on hover
+	carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
+	carousel.addEventListener('mouseleave', startAutoScroll);
+
+	// Initial start
+	startAutoScroll();
+
+	// Update current slide on manual scroll
+	carousel.addEventListener('scroll', () => {
+		currentSlide = Math.round(carousel.scrollLeft / (itemWidth + spacing));
+	});
+});
+    </script>
+{% endblock content %}

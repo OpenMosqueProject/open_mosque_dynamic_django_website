@@ -1,0 +1,85 @@
+{% load static %}
+
+{% load masjid_tags %}
+{% get_masjid as masjid_base %}
+<html 
+  {% if masjid_base.theme_choice %}
+    data-theme="{{ masjid_base.theme_choice }}"
+  {% else %}
+    data-theme="light"
+  {% endif %}>
+    <head>
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.8/daisyui.css" rel="stylesheet" type="text/css" />
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.8/themes.css" rel="stylesheet" type="text/css" />
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      {% block css %}{% endblock css %}
+      <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+
+    <body class="{% block bodyclass %}{% endblock bodyclass %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <div class="navbar bg-base-100 container mx-auto px-0 md:px-4 lg:px-8">
+          <div class="navbar-start">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+              </div>
+              <ul
+                tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                  {% include 'nav_bar_links.html' %}
+              </ul>
+            </div>
+            
+            <a class="btn btn-ghost text-xl" href="{% url 'posts:home' %}">
+              <img src="{{masjid_base.masjid_Logo.url}}" alt="" width="50" height="50">
+            </a>
+          </div>
+          <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+              {% include 'nav_bar_links.html' %}
+            </ul>
+          </div>
+          <div class="navbar-end">
+            {% if user.is_authenticated %}
+            <div class="dropdown dropdown-end">
+              <!-- The navbar end button/icon -->
+              <div tabindex="0" role="button" class="btn btn-ghost">
+                <button type="button" class="btn btn-secondary" >Admin</button>
+              </div>
+
+              <!-- The dropdown menu -->
+              <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <li><a class="" href="{% url 'posts:post_form' %}"><i class="fa-solid fa-plus"></i> Add Post</a></li>
+              <div class="divider divider-secondary"></div>
+              <li><a class="" href="{% url 'masjidConfig:edit_profile' %}">Edit Website Settings</a></li>
+              <li><a class="" href="{% url 'posts:posts_admin' %}">Admin Posts</a></li>
+              <div class="divider divider-secondary"></div>
+              <li><a href="{% url 'logout' %}" class="btn btn-error">Logout</a></li>
+            </ul>
+          </div>
+
+          {% else %}
+            <form class="d-flex">
+              <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+            </form>
+          {% endif %}
+          </div>
+        </div>
+
+          <div class="container mx-auto px-0 md:px-4 lg:px-8">{% block content %} {% endblock content %}</div>
+
+          
+
+          <div class="divider px-8"></div>
+
+
+          <div class="bg-base-300">
+            {% include 'footer.html' %}
+          </div>
+    </body>
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+</html>

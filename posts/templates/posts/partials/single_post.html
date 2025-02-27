@@ -1,0 +1,65 @@
+{% load static %}
+
+
+    <li class="list-row" id="post{{post.id}}">
+        <!-- Image Column -->
+        <div>
+            {% if post.image %}
+                <img src="{{post.image.url}}" class="size-24 rounded-box">
+            {% else %}
+                <img src="{% static 'images/default_image.jpg' %}" class="size-24 rounded-box">
+            {% endif %}
+        </div>
+
+        <!-- Content Column -->
+        <div class="flex-1">
+            <div>
+                <h5 class="text-lg font-semibold">
+                    <a href="{% url 'posts:post_view' post.id %}" class="hover:text-primary">{{post.title}}</a>
+                </h5>
+                <p class="text-sm">{{post.content|safe|truncatewords:30}}</p>
+            </div>
+            <div class="flex justify-between text-xs opacity-60">
+                <div>{{post.published_date}}</div>
+                {% if post.updated_date %}
+                    <div>Last updated {{post.updated_date}}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Buttons Column -->
+        <div class="flex flex-col gap-2">
+            <!-- Publish/Unpublish Button -->
+            <div id="publishButton{{post.id}}">
+                {% if post.published %}
+                    <button class="btn btn-warning btn-sm"
+                        hx-post="{% url 'posts:post_toggle' post.id %}"
+                        hx-target="#post{{post.id}}"
+                    >
+                        <i class="fa-solid fa-eye"></i> Unpublish
+                    </button>
+                {% else %}
+                    <button class="btn btn-success btn-sm"
+                        hx-post="{% url 'posts:post_toggle' post.id %}"
+                        hx-target="#post{{post.id}}"
+                    >
+                        <i class="fa-solid fa-eye-slash"></i> Publish
+                    </button>
+                {% endif %}
+            </div>
+
+            <!-- Edit Button -->
+            <a class="btn btn-warning btn-sm" href="{% url 'posts:post_edit' post.id %}">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+            </a>
+
+            <!-- Delete Button -->
+            <button class="btn btn-danger btn-sm"
+                hx-delete="{% url 'posts:delete_post' post.id %}"
+                hx-confirm="Are you sure you want to delete this post?"
+                hx-target="#posts_list"
+            >
+                <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+        </div>
+    </li>

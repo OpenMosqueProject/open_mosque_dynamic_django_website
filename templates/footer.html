@@ -1,0 +1,40 @@
+{% load static %}
+
+<footer class="footer sm:footer-horizontal bg-secondary p-10">
+  <aside>
+  <img src="{{masjid_base.masjid_Logo.url}}" alt="mosque logo" width="150">
+    <p>
+      <span class="text-xl">{{ masjid_base.masjid_Name }}</span>
+      <br />
+      {% if masjid_base.established %} Est {{ masjid_base.established |date:"Y"}} {% endif %}
+    </p>
+  </aside>
+
+  <!-- Links section of the nav bar -->
+  <nav>
+    <h6 class="footer-title text-accent">Quick Links</h6>
+    <a href="{% url 'posts:home' %}" class="link link-hover">Home</a>
+    <a href="{% url 'posts:month_view'%}" class="link link-hover">Monthly Prayer Times</a>
+    <a href="{% url 'posts:post_list'%}" class="link link-hover">Our Posts</a>
+    <a href="{% url 'masjidConfig:about' %}" class="link link-hover">About</a>
+  </nav>
+
+  <!-- Social section of the navbar -->
+  <nav>
+    <h6 class="footer-title text-accent">Social</h6>
+    <div class="grid grid-flow-col gap-4">
+      {% include 'social_media_icons.html' %}      
+    </div>
+  </nav>
+</footer>
+<footer class="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4">
+  <aside>
+    <p>
+      <a href="https://openmosqueproject.com/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <img class="inline-block" src="{% static 'images/gsm_logo.png' %}" alt="" width="30" height="30">
+      </a>
+      <i class="fa-brands fa-creative-commons"></i>
+      {% now "Y" %} - Open Mosque Project - <a href="https://openmosqueproject.com/">Get a free website for your mosque with us</a>
+    </p>
+  </aside>
+</footer>

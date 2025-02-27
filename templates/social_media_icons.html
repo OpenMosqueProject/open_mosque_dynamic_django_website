@@ -1,0 +1,31 @@
+{% load static %}
+{% if masjid_base.instagram %}
+<a href="https://instagram.com/{{masjid.instagram}}">
+    <i class="fa-brands fa-instagram fa-2xl text-accent"></i>
+</a>
+{% endif %}
+{% if masjid_base.facebook %}
+<a href="https://facebook.com/{{masjid.facebook}}">
+    <i class="fa-brands fa-facebook fa-2xl text-accent"></i>
+</a>
+{% endif %}
+{% if masjid_base.telegram %}
+<a href="https://t.me/{{masjid.telegram}}">
+    <i class="fa-brands fa-telegram fa-2xl text-accent"></i>
+</a>
+{% endif %}
+{% if masjid_base.youtube %}
+<a href="https://youtube.com/user/{{masjid.youtube}}">
+    <i class="fa-brands fa-youtube fa-2xl text-accent"></i>
+</a>
+{% endif %}
+{% if masjid_base.twitter %}
+<a href="https://twitter.com/{{masjid.twitter}}">
+    <i class="fa-brands fa-twitter fa-2xl text-accent"></i>
+</a>
+{% endif %}
+{% if masjid_base.tiktok %}
+<a href="https://www.tiktok.com/@{{masjid.tiktok}}">
+    <i class="fa-brands fa-tiktok fa-2xl text-accent"></i>
+</a>
+{% endif %}

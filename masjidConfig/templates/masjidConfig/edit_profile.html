@@ -1,0 +1,326 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+    <!-- Include Quill stylesheet -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <!-- Include Quill library -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="px-4 py-5 my-5 text-center">
+  <img class="d-block mx-auto mb-4" src="{{masjid.masjid_Logo.url}}" alt="" width="80" height="80">
+  <h1 class="text-2xl">{{masjid.masjid_Name|title}} Profile Edit Page</h1>
+  
+</div>
+
+<div class="container">
+
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+
+    <!-- DaisyUI Accordion -->
+    <div class="join join-vertical w-full">
+        <!-- Profile Information Section -->
+        <div class="collapse collapse-arrow join-item border border-accent">
+            <input type="radio" name="accordion" aria-label="Profile Information" checked />
+            <div class="collapse-title text-xl font-medium">
+                Profile Information
+            </div>
+            <div class="collapse-content">
+                <div class="space-y-4">
+                    <!-- Masjid Name -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Masjid Name</span>
+                        </label>
+                        {{ form.masjid_Name|add_class:"input input-bordered w-full" }}
+                    </div>
+
+                    <!-- Masjid Logo -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Masjid Logo</span>
+                        </label>
+                        <div class="flex items-center gap-2">
+                            {% if masjid.masjid_Logo %}
+                                <img src="{{ masjid.masjid_Logo.url }}" width="40px" alt="Masjid Logo">
+                            {% endif %}
+                            {{ form.masjid_Logo|add_class:"file-input file-input-bordered w-full" }}
+                        </div>
+                    </div>
+
+                    <!-- About Masjid -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">About Masjid</span>
+                        </label>
+                        <div id="editor" class="quill-editor">{{ form.about.value|safe }}</div>
+                        <textarea id="content" name="content" style="display: none;">{{ form.about.value|safe }}</textarea>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">First Line of Address</span>
+                        </label>
+                        {{ form.address1|add_class:"input input-bordered w-full" }}
+                    </div>
+
+                    <!-- Town, City, Country, Postcode -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Town</span>
+                            </label>
+                            {{ form.town|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">City</span>
+                            </label>
+                            {{ form.city|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Country</span>
+                            </label>
+                            {{ form.country|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Postcode</span>
+                            </label>
+                            {{ form.postcode|add_class:"input input-bordered w-full" }}
+                        </div>
+                    </div>
+
+                    <!-- What3Words -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">What3Words</span>
+                        </label>
+                        {{ form.what3words|add_class:"input input-bordered w-full" }}
+                    </div>
+
+                    <!-- Imam -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Imam</span>
+                        </label>
+                        {{ form.imam|add_class:"input input-bordered w-full" }}
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Landline</span>
+                            </label>
+                            {{ form.landline|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Mobile</span>
+                            </label>
+                            {{ form.mobile|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Email</span>
+                            </label>
+                            {{ form.email|add_class:"input input-bordered w-full" }}
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Social Media -->
+                    <h2 class="text-lg font-semibold">Social Media</h2>
+                    <div class="space-y-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Facebook</span>
+                            </label>
+                            {{ form.facebook|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Instagram</span>
+                            </label>
+                            {{ form.instagram|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">YouTube</span>
+                            </label>
+                            {{ form.youtube|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Twitter</span>
+                            </label>
+                            {{ form.twitter|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Telegram</span>
+                            </label>
+                            {{ form.telegram|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">TikTok</span>
+                            </label>
+                            {{ form.tiktok|add_class:"input input-bordered w-full" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prayer Calculation Methods Section -->
+        <div class="collapse collapse-arrow join-item border border-primary">
+            <input type="radio" name="accordion" aria-label="Prayer Calculation Methods" />
+            <div class="collapse-title text-xl font-medium">
+                Prayer Calculation Methods
+            </div>
+            <div class="collapse-content">
+                <div class="space-y-4">
+                    <!-- Help Links -->
+                    <div class="alert alert-warning">
+                        <div>
+                            <span>For help with calculation methods, <a href="http://praytimes.org/wiki/Prayer_Times_Calculation" target="_blank" class="link">click here</a>.</span>
+                            <br>
+                            <span>For an explanation of the shafaq (twilight) calculation, <a href="https://www.msofg.org/2018/12/how-do-we-calculate-our-prayers-time/" target="_blank" class="link">click here</a>.</span>
+                        </div>
+                    </div>
+
+                    <!-- Method, Shafaq, School -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Method</span>
+                            </label>
+                            {{ form.method|add_class:"select select-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Shafaq</span>
+                            </label>
+                            {{ form.shafaq|add_class:"select select-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">School</span>
+                            </label>
+                            {{ form.school|add_class:"select select-bordered w-full" }}
+                        </div>
+                    </div>
+
+                    <!-- Latitude and Longitude -->
+                    <div class="alert alert-info">
+                        <div>
+                            <span>To work out longitude & latitude, <a href="https://www.latlong.net/" target="_blank" class="link">click here</a>.</span>
+                        </div>
+                    </div>
+
+                    <!-- Jamaah Minutes -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Latitude</span>
+                            </label>
+                            {{ form.latitude|add_class:"input input-bordered w-full" }}
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Longitude</span>
+                            </label>
+                            {{ form.longitude|add_class:"input input-bordered w-full" }}
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Fajr Jamaah Minutes</span>
+                        </label>
+                        {{ form.fajr_jamaah_minutes|add_class:"select" }}
+                      </div>
+                      <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Dhuhr Jamaah Minutes</span>
+                        </label>
+                        {{ form.dhuhr_jamaah_minutes|add_class:"select" }}
+                      </div>
+                      <div class="form-control">
+                          <label class="label">
+                              <span class="label-text">Asr Jamaah Minutes</span>
+                          </label>
+                          {{ form.asr_jamaah_minutes|add_class:"select" }}
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Maghrib Jamaah Minutes</span>
+                        </label>
+                          {{ form.maghrib_jamaah_minutes|add_class:"select" }}
+                      </div>
+                      <div class="form-control">
+                          <label class="label">
+                              <span class="label-text">Isha Jamaah Minutes</span>
+                          </label>
+                          {{ form.isha_jamaah_minutes|add_class:"select" }}
+                      </div>
+
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Site Styling Section -->
+        <div class="collapse collapse-arrow join-item border border-secondary">
+            <input type="radio" name="accordion" aria-label="Site Styling" />
+            <div class="collapse-title text-xl font-medium">
+                Site Styling
+            </div>
+            <div class="collapse-content">
+                <div class="space-y-4">
+                    <!-- Theme Choice -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Theme Choice</span>
+                        </label>
+                        {{ form.theme_choice|add_class:"select select-bordered w-full" }}
+                    </div>
+
+                    <!-- Masjid Photo -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Masjid Photo</span>
+                        </label>
+                        {% if masjid.masjid_Photo %}
+                            <img src="{{ masjid.masjid_Photo.url }}" width="100px" alt="Masjid Photo">
+                        {% endif %}
+                        {{ form.masjid_Photo|add_class:"file-input file-input-bordered w-full" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-6">
+        <input type="submit" value="Save Profile" class="btn btn-primary w-full">
+    </div>
+</form>
+</div>
+<script src="{% static 'js/quill_editor_settings.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div style="display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width:80%; overflow: hidden"> 
+    <!-- max-height:450px;  -->
+        <img src="{{post.image.url}}">
+</div>
+ 
+<hr>
+<h1>{{post.title|title}}</h1>
+<hr>
+<h5>
+    <i class="fa-solid fa-newspaper"></i> {{post.type}} - 
+    <i class="fa-solid fa-calendar"></i> Published: {{post.published_date}} 
+    {% if post.updated_date %}<sub><i class="fa-solid fa-pen-ruler"></i> (edited: {{post.updated_date}}) </sub>{% endif %}
+    {% if user.is_authenticated %} <a class="btn btn-warning my-2" href="{% url 'posts:post_edit' post.id %}">
+        <i class="fa-solid fa-pen-to-square"></i> Edit
+    </a>
+    {% endif %}
+</h5>
+<p><br>{{post.content|safe}}</p>
+
+{% endblock content %}

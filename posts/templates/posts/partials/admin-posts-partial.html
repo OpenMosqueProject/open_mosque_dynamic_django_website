@@ -1,0 +1,10 @@
+{% load static %}
+<ul class="list bg-base-100 rounded-box shadow-md"
+    id="posts_list"  
+    hx-swap="outerHTML swap"
+    >
+    <li class="p-4 pb-2 text-xxl opacity-60 tracking-wide">Posts</li>
+    {% for post in posts %}
+        {% include 'posts/partials/single_post.html' %}
+    {% endfor %}
+</ul>
