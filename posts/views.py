@@ -108,7 +108,6 @@ def get_month_tbl():
         raise Exception(f"API request failed with status code {month_api.status_code}")
     
     data = month_api.json()
-    print(data)
     d = data['data']
     month_data = []
     for row in d:
