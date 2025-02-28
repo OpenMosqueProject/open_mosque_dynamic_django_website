@@ -12,7 +12,7 @@
 
   <!-- Links section of the nav bar -->
   <nav>
-    <h6 class="footer-title text-accent">Quick Links</h6>
+    <h6 class="text-lg font-bold text-accent">Quick Links</h6>
     <a href="{% url 'posts:home' %}" class="link link-hover">Home</a>
     <a href="{% url 'posts:month_view'%}" class="link link-hover">Monthly Prayer Times</a>
     <a href="{% url 'posts:post_list'%}" class="link link-hover">Our Posts</a>
@@ -21,7 +21,7 @@
 
   <!-- Social section of the navbar -->
   <nav>
-    <h6 class="footer-title text-accent">Social</h6>
+    <h6 class="text-lg font-bold text-accent text-accent">Social</h6>
     <div class="grid grid-flow-col gap-4">
       {% include 'social_media_icons.html' %}      
     </div>
