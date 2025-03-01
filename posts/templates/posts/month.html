@@ -4,117 +4,104 @@
 {% block content %}
 
 <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="{{masjid_base.masjid_Logo.url}}" alt="" width="80" height="80">
-    <h1 class="display-5 fw-bold">{{masjid_base.masjid_Name|title}} Monthly Prayer Times</h1>
-    <div>
-      <!-- <p class="lead mb-4">Prayer times for the month</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Choose Month
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Jan</a></li>
-              <li><a class="dropdown-item" href="#">Feb</a></li>
-              <li><a class="dropdown-item" href="#">Mar</a></li>
-            </ul>
-          </div>
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Select</button>
-        
-        
-      </div> -->
-      <a href="{% url 'posts:pdf' %}" class="btn btn-primary btn-lg px-4 gap-3"><i class="fa-solid fa-print"></i></a>
-    </div>
+  <!-- Logo -->
+  <img class="mx-auto mb-4 w-20 h-20" src="{{ masjid_base.masjid_Logo.url }}" alt="Masjid Logo">
+  
+  <!-- Title -->
+  <h1 class="text-3xl font-bold mb-4">{{ masjid_base.masjid_Name|title }} Monthly Prayer Times for {{ month }} {{ year }}</h1>
+  
+  <!-- Print Button -->
+  <div class="mt-6">
+    <a href="{% url 'posts:pdf' %}" class="btn btn-primary btn-lg gap-3">
+      <i class="fa-solid fa-print"></i> Print
+    </a>
   </div>
+</div>
 
-  <div id="mytable"></div>
+<!-- Table Section -->
+<div id="mytable" class="overflow-x-auto"></div>
 
-  <script>
-    var obj = JSON.parse('{{ d | escapejs }}');
-    var mytable = '<table class="table text-center"><thead class=" thead-light"><tr><th scope="col"><i class="fa-solid fa-calendar-days"></i></th>';
-    mytable += '<th scope="col" colspan="2">Fajr</th>'; 
-    mytable += '<th scope="col">Sunrise</th>';
-    mytable += '<th scope="col" colspan="2">Dhuhr</th>';
-    mytable += '<th scope="col" colspan="2">Asr</th>'; 
-    mytable += '<th scope="col" colspan="2">Maghrib</th>';
-    mytable += '<th scope="col" colspan="2">Isha</th></tr></thead><tbody>'; 
+<script>
+  var obj = JSON.parse('{{ d | escapejs }}');
+  var mytable = '<table class="table w-full text-center"><thead><tr><th scope="col"></th>';
+mytable += '<tr>';
+  mytable += '<th scope="col" rowspan="2"><i class="fa-solid fa-calendar-days"></i></th>'; // Day
+  mytable += '<th scope="col" colspan="2">Fajr</th>'; // Fajr
+  mytable += '<th scope="col" rowspan="2">Sunrise</th>'; // Sunrise
+  mytable += '<th scope="col" colspan="2">Dhuhr</th>'; // Dhuhr
+  mytable += '<th scope="col" colspan="2">Asr</th>'; // Asr
+  mytable += '<th scope="col" colspan="2">Maghrib</th>'; // Maghrib
+  mytable += '<th scope="col" colspan="2">Isha</th>'; // Isha
+  mytable += '</tr>';
 
-    var days_in_the_month = Object.keys(obj).length;
-    // console.log(days_in_the_month); // checking if the number of the days of month is correct.
-    var today = new Date(); // Using JS to pull today's actual date
-    var today_formatted =today.getDate().toString();
-    var today_date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear(); // today as D-M-YYYY
-    if (today_formatted.length<2){today_formatted='0'+today_formatted} // adds 0 to day if length <2
-    var month_formatted = (today.getMonth()+1).toString();
-    if (month_formatted.length<2){month_formatted='0'+month_formatted} // adds 0 to month if length <2
-    var today_date_formatted = today_formatted+'-'+month_formatted+'-'+today.getFullYear(); // today as DD-MM-YYYY
-    
-    var tmonth = new Array(12);
-    tmonth[0] = "January";
-    tmonth[1] = "February";
-    tmonth[2] = "March";
-    tmonth[3] = "April";
-    tmonth[4] = "May";
-    tmonth[5] = "June";
-    tmonth[6] = "July";
-    tmonth[7] = "August";
-    tmonth[8] = "September";
-    tmonth[9] = "October";
-    tmonth[10] = "November";
-    tmonth[11] = "December";
+  // Sub-Headings Row
+  mytable += '<tr>';
+  mytable += '<th scope="col">Azan</th>'; // Fajr Azan
+  mytable += '<th scope="col">Jamaah</th>'; // Fajr Jamaah
+  mytable += '<th scope="col">Azan</th>'; // Dhuhr Azan
+  mytable += '<th scope="col">Jamaah</th>'; // Dhuhr Jamaah
+  mytable += '<th scope="col">Azan</th>'; // Asr Azan
+  mytable += '<th scope="col">Jamaah</th>'; // Asr Jamaah
+  mytable += '<th scope="col">Azan</th>'; // Maghrib Azan
+  mytable += '<th scope="col">Jamaah</th>'; // Maghrib Jamaah
+  mytable += '<th scope="col">Azan</th>'; // Isha Azan
+  mytable += '<th scope="col">Jamaah</th>'; // Isha Jamaah
+  mytable += '</tr>';
+  mytable += '</thead><tbody>'; 
 
-    var weekday = new Array(7);
-    weekday[0] = "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
-    var month = tmonth[today.getMonth()];
-    var bugun = weekday[today.getDay()];
+  var days_in_the_month = Object.keys(obj).length;
+  var today = new Date();
+  var today_formatted = today.getDate().toString();
+  var today_date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  if (today_formatted.length < 2) { today_formatted = '0' + today_formatted; }
+  var month_formatted = (today.getMonth() + 1).toString();
+  if (month_formatted.length < 2) { month_formatted = '0' + month_formatted; }
+  var today_date_formatted = today_formatted + '-' + month_formatted + '-' + today.getFullYear();
 
-    let newday = '';
-    
-    for(var i = 0; i < days_in_the_month; i++) {
-      day = (i+1).toString();
-      if (day.length<2){day='0'+day}
-      
-      var gun = day.toString()+'-'+month_formatted.toString()+'-'+today.getFullYear(); // each day on calendar
-      
-      var fajr = obj[i]["fajr"];
-      var fajr_j = obj[i]['fajr_j'];
-      var sun = obj[i]['sunrise'];
-      var dhu = obj[i]['dhuhr'];
-      var dhu_j = obj[i]['dhuhr_j'];
-      var asr = obj[i]['asr'];
-      var asr_j = obj[i]['asr_j'];
-      var mag = obj[i]['maghrib'];
-      var mag_j = obj[i]['maghrib_j'];
-      var ish = obj[i]['isha'];
-      var ish_j = obj[i]['isha_j'];
-      //console.log(today_date)
-      var each_day = new Date(gun)
-      var today_weekday = weekday[each_day.getDay()];
-      
-      if (obj[i]["date"]==today_date_formatted){
-        newday = "<tr class='table-active'><td>"+(day)+"</td><td>"+fajr+"</td><td>"+fajr_j+"</td><td>"+sun+"</td><td>"+dhu+"</td><td>"+dhu_j+"</td><td>"+asr+"</td><td>"+asr_j+"</td><td>"+mag+"</td><td>"+mag_j+"</td><td>"+ish+"</td><td>"+ish_j+"</td></tr>";
-      }else if (obj[i]["weekday"]=='Friday') {
-        newday = "<tr class='table-warning'><td>"+(day)+"</td><td>"+fajr+"</td><td>"+fajr_j+"</td><td>"+sun+"</td><td>"+dhu+"</td><td>"+dhu_j+"</td><td>"+asr+"</td><td>"+asr_j+"</td><td>"+mag+"</td><td>"+mag_j+"</td><td>"+ish+"</td><td>"+ish_j+"</td></tr>";
-      }else{
-      newday = "<tr><td>"+(day)+"</td><td>"+fajr+"</td><td>"+fajr_j+"</td><td>"+sun+"</td><td>"+dhu+"</td><td>"+dhu_j+"</td><td>"+asr+"</td><td>"+asr_j+"</td><td>"+mag+"</td><td>"+mag_j+"</td><td>"+ish+"</td><td>"+ish_j+"</td></tr>";
-      }
-      mytable += newday;
+  var tmonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var month = tmonth[today.getMonth()];
+  var bugun = weekday[today.getDay()];
 
+  let newday = '';
+
+  for (var i = 0; i < days_in_the_month; i++) {
+    let day = (i + 1).toString();
+    if (day.length < 2) { day = '0' + day; }
+
+    var gun = day + '-' + month_formatted + '-' + today.getFullYear();
+    var fajr = obj[i]["fajr"];
+    var fajr_j = obj[i]['fajr_j'];
+    var sun = obj[i]['sunrise'];
+    var dhu = obj[i]['dhuhr'];
+    var dhu_j = obj[i]['dhuhr_j'];
+    var asr = obj[i]['asr'];
+    var asr_j = obj[i]['asr_j'];
+    var mag = obj[i]['maghrib'];
+    var mag_j = obj[i]['maghrib_j'];
+    var ish = obj[i]['isha'];
+    var ish_j = obj[i]['isha_j'];
+
+    var each_day = new Date(gun);
+    var today_weekday = weekday[each_day.getDay()];
+
+    if (obj[i]["date"] == today_date_formatted) {
+      newday = `<tr class="bg-primary text-primary-content"><td>${day}</td><td>${fajr}</td><td>${fajr_j}</td><td>${sun}</td><td>${dhu}</td><td>${dhu_j}</td><td>${asr}</td><td>${asr_j}</td><td>${mag}</td><td>${mag_j}</td><td>${ish}</td><td>${ish_j}</td></tr>`;
+    } else if (obj[i]["weekday"] == 'Friday') {
+      newday = `<tr class="bg-warning text-warning-content"><td>${day}</td><td>${fajr}</td><td>${fajr_j}</td><td>${sun}</td><td>${dhu}</td><td>${dhu_j}</td><td>${asr}</td><td>${asr_j}</td><td>${mag}</td><td>${mag_j}</td><td>${ish}</td><td>${ish_j}</td></tr>`;
+    } else {
+      newday = `<tr><td>${day}</td><td>${fajr}</td><td>${fajr_j}</td><td>${sun}</td><td>${dhu}</td><td>${dhu_j}</td><td>${asr}</td><td>${asr_j}</td><td>${mag}</td><td>${mag_j}</td><td>${ish}</td><td>${ish_j}</td></tr>`;
     }
+    mytable += newday;
+  }
   mytable += "</tbody></table>";
   document.getElementById('mytable').innerHTML = mytable;
+</script>
 
-  </script>
-  <script>
-    function printFunction() { 
-      window.print(); 
-    }
-  </script>
+<script>
+  function printFunction() { 
+    window.print(); 
+  }
+</script>
 
   {% endblock content %}

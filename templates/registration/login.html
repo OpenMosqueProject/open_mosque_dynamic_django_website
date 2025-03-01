@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="min-h-screen flex items-center justify-center">
+    <div class="card w-full max-w-md bg-base-200 shadow-xl">
+      <div class="card-body">
+        <img class="mx-auto w-20 h-20 mb-4" src="{% static 'images/gsm_logo.png' %}" alt="Logo">
+        <h2 class="card-title text-center text-2xl font-light mb-6">Administrator Sign In</h2>
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+  
+          <!-- Username Field -->
+          <label class="input input-bordered flex items-center gap-2 mb-4">
+            <span class="label-text"><i class="fa-solid fa-user"></i></span>
+            <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" class="grow" placeholder="Enter your username" />
+          </label>
+  
+          <!-- Password Field -->
+          <label class="input input-bordered flex items-center gap-2 mb-6">
+            <span class="label-text"><i class="fa-solid fa-key"></i></span>
+            <input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" class="grow" placeholder="Enter your password" />
+          </label>
+  
+          <!-- Submit Button -->
+          <div class="form-control">
+            <button type="submit" class="btn btn-primary text-uppercase font-bold">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

@@ -7,7 +7,7 @@ from django.views.generic import View
 from django.template.loader import get_template
 from functools import lru_cache
 
-# from .utils import render_to_pdf
+from .utils import render_to_pdf
 
 import requests, json, datetime
 from .forms import PostForm
@@ -38,9 +38,7 @@ def jamaah_calculator(azaanTime, minutesAfter):
     else:
         return ceil_dt(datetime.datetime.strptime(azaanTime, '%H:%M'), datetime.timedelta(minutes=30))
 
-# NOTE:
-# Ternary statements below solves minutes being displayed as single digit eg
-# 17:05 displaying as 17:5 or 20:00 displaying as 20:0
+
 @lru_cache(maxsize=1)
 def get_masjid_data():
     masjid = CentreProfile.load()
@@ -61,6 +59,9 @@ def get_masjid_data():
     isha_jamaah_minutes = masjid.isha_jamaah_minutes
     return masjid, masjid_name,city, country, method, longitude, latitude, current_time, month, year, fajr_jam_min,dh_jam_min, asr_jamaah_minutes, maghrib_jamaah_minutes,isha_jamaah_minutes
 
+# NOTE:
+# Ternary statements below solves minutes being displayed as single digit eg
+# 17:05 displaying as 17:5 or 20:00 displaying as 20:0
 def home(request):
     # Collecting masjid data from class
     masjid, masjid_name,city, country, method, longitude, latitude, current_time, month, year, fajr_jam_min,dh_jam_min, asr_jamaah_minutes, maghrib_jamaah_minutes,isha_jamaah_minutes = get_masjid_data()
@@ -142,7 +143,10 @@ def get_month_tbl():
 
 def month_view(request):
     month_data = get_month_tbl()
-    context = {'d':json.dumps(month_data)}
+    current_time = datetime.datetime.now()
+    month_name = current_time.strftime("%B")
+    year = current_time.year 
+    context = {'d':json.dumps(month_data), 'month':month_name, 'year':year}
     return render(request, 'posts/month.html', context)
 
 def post_view(request, id):
@@ -218,8 +222,9 @@ class GeneratePdf(View):
         template = get_template('pdf/timetable.html')
         current_time = datetime.datetime.now()
         month = current_time.month
+        month_name = current_time.strftime("%B")
         year = current_time.year 
-        context = {'data':month_data} 
+        context = {'data':month_data, 'month':month_name, 'year':year} 
         html = template.render(context) 
         pdf = render_to_pdf('pdf/timetable.html', context) 
         if pdf: 
