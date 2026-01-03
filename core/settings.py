@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # third party apps
     'fontawesomefree',
     'widget_tweaks',
+    'imagekit',
     
 ]
 

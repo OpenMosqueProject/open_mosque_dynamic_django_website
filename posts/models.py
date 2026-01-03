@@ -1,7 +1,9 @@
 from django.db import models
 from django.urls import reverse
-from versatileimagefield.fields import VersatileImageField
-from versatileimagefield.placeholder import OnStoragePlaceholderImage
+from django.conf import settings
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+import os
 
 # Create your models here.
 POST_CHOICES = [
@@ -17,14 +19,21 @@ class Post(models.Model):
     published = models.BooleanField(default=False)
     published_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    image = VersatileImageField('Image', upload_to='images/', 
-            blank=True,
-            placeholder_image=OnStoragePlaceholderImage(
-                path='images/default_image.jpg'
-        ))
+    image = ProcessedImageField(
+        upload_to='images/',
+        processors=[ResizeToFill(800, 450)],
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.title
+    
+    def get_image_url(self):
+        """Returns the image URL or falls back to default static image"""
+        if self.image:
+            return self.image.url
+        return os.path.join(settings.STATIC_URL, 'images/default_image.jpg')
 
     def get_absolute_url(self, id=id or None):
         return reverse("posts:post_view", kwargs={'id':self.id})

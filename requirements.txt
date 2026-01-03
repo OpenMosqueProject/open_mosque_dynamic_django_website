@@ -1,8 +1,7 @@
-django>~5.1.7
-pillow==11.1.0
+Django==6.0
+pillow==12.1.0
 fontawesomefree==6.6.0
-django-versatileimagefield==3.1
-python-magic-bin==0.4.14
-requests>=2.32.4
-django-widget-tweaks==1.5.0
+django-imagekit==5.0.0
+requests>=2.32.5
+django-widget-tweaks==1.5.1
 xhtml2pdf==0.2.17
