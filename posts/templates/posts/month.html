@@ -70,17 +70,22 @@ mytable += '<tr>';
     if (day.length < 2) { day = '0' + day; }
 
     var gun = day + '-' + month_formatted + '-' + today.getFullYear();
+    var is_day_open = obj[i]['is_day_open'];
+    
+    // Azan times are always shown
     var fajr = obj[i]["fajr"];
-    var fajr_j = obj[i]['fajr_j'];
     var sun = obj[i]['sunrise'];
     var dhu = obj[i]['dhuhr'];
-    var dhu_j = obj[i]['dhuhr_j'];
     var asr = obj[i]['asr'];
-    var asr_j = obj[i]['asr_j'];
     var mag = obj[i]['maghrib'];
-    var mag_j = obj[i]['maghrib_j'];
     var ish = obj[i]['isha'];
-    var ish_j = obj[i]['isha_j'];
+    
+    // Jamaah times show either the time or "CLOSED"
+    var fajr_j = (is_day_open && obj[i]['fajr_jamaah']) ? obj[i]['fajr_j'] : '<span style="color: red; font-weight: bold;">CLOSED</span>';
+    var dhu_j = (is_day_open && obj[i]['dhuhr_jamaah']) ? obj[i]['dhuhr_j'] : '<span style="color: red; font-weight: bold;">CLOSED</span>';
+    var asr_j = (is_day_open && obj[i]['asr_jamaah']) ? obj[i]['asr_j'] : '<span style="color: red; font-weight: bold;">CLOSED</span>';
+    var mag_j = (is_day_open && obj[i]['maghrib_jamaah']) ? obj[i]['maghrib_j'] : '<span style="color: red; font-weight: bold;">CLOSED</span>';
+    var ish_j = (is_day_open && obj[i]['isha_jamaah']) ? obj[i]['isha_j'] : '<span style="color: red; font-weight: bold;">CLOSED</span>';
 
     var each_day = new Date(gun);
     var today_weekday = weekday[each_day.getDay()];

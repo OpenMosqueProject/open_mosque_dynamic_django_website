@@ -93,8 +93,22 @@ def home(request):
     isha_j= f"{ish.hour}:{ismins}"
     today = d['data']['date']['readable']
     hijri = f"{d['data']['date']['hijri']['day']}-{d['data']['date']['hijri']['month']['en']}-{d['data']['date']['hijri']['year']}"
+    
+    # Get today's day name (lowercase)
+    today_day = current_time.strftime('%A').lower()
+    weekly_schedule = masjid.weekly_schedule
+    today_schedule = weekly_schedule.get(today_day, {
+        'open': True,
+        'fajr_jamaah': True,
+        'dhuhr_jamaah': True,
+        'asr_jamaah': True,
+        'maghrib_jamaah': True,
+        'isha_jamaah': True
+    })
+    
     context = {'masjid':masjid, 'posts':posts, 'fajr_j':fajr_j, 'dhuhr_j':dhuhr_j, 'asr_j':asr_j, 'maghrib_j':maghrib_j, 'isha_j':isha_j,
-        'fajr':fajr,'sunrise':sunrise, 'dhuhr':dhuhr, 'asr':asr, 'maghrib':maghrib, 'isha':isha, 'today':today, 'hijri':hijri}
+        'fajr':fajr,'sunrise':sunrise, 'dhuhr':dhuhr, 'asr':asr, 'maghrib':maghrib, 'isha':isha, 'today':today, 'hijri':hijri,
+        'today_day':today_day, 'weekly_schedule':weekly_schedule, 'today_schedule':today_schedule}
     
     return render(request, 'posts/home.html', context)
 
@@ -111,34 +125,56 @@ def get_month_tbl():
     data = month_api.json()
     d = data['data']
     month_data = []
+    weekly_schedule = masjid.weekly_schedule
+    
     for row in d:
         date = row["date"]["gregorian"]["date"]
-        weekday =row["date"]["gregorian"]["weekday"]["en"]
+        weekday = row["date"]["gregorian"]["weekday"]["en"]
+        weekday_lower = weekday.lower()
         mon = row["date"]["gregorian"]["month"]["en"]
+        
+        # Check if centre is open on this day
+        day_schedule = weekly_schedule.get(weekday_lower, {})
+        is_day_open = day_schedule.get('open', True)
+        
         fajr = row["timings"]["Fajr"][0:5]
         sunrise = row["timings"]["Sunrise"][0:5]
         fj = jamaah_calculator(fajr, fajr_jam_min)
         fjmins = f"{fj.minute}" if len(str(fj.minute))==2 else f"0{fj.minute}"
         fajr_j = f"{fj.hour}:{fjmins}"
+        
         dhuhr = row["timings"]["Dhuhr"][0:5]
         dh = jamaah_calculator(dhuhr, dh_jam_min)
         dhmins = f"{dh.minute}" if len(str(dh.minute))==2 else f"0{dh.minute}"
         dhuhr_j = f"{dh.hour}:{dhmins}"
+        
         asr = row["timings"]["Asr"][0:5]
         asrj = jamaah_calculator(asr, asr_jamaah_minutes)
         asmins = f"{asrj.minute}" if len(str(asrj.minute))==2 else f"0{asrj.minute}"
         asr_j= f"{asrj.hour}:{asmins}"
+        
         maghrib = row["timings"]["Maghrib"][0:5]
         mg = jamaah_calculator(maghrib, maghrib_jamaah_minutes)
         mgmins = f"{mg.minute}" if len(str(mg.minute))==2 else f"0{mg.minute}"
         maghrib_j =  f"{mg.hour}:{mgmins}"
+        
         isha = row["timings"]["Isha"][0:5]
         ish = jamaah_calculator(isha, isha_jamaah_minutes)
         ismins = f"{ish.minute}" if len(str(ish.minute))==2 else f"0{ish.minute}"
         isha_j= f"{ish.hour}:{ismins}"
+        
         day_no = row["date"]["gregorian"]["day"]
         day_ab = row["date"]["gregorian"]["weekday"]
-        month_data.append({'fajr':fajr,'fajr_j':fajr_j,'sunrise':sunrise, 'dhuhr':dhuhr, 'dhuhr_j':dhuhr_j,'asr':asr,'asr_j':asr_j,'maghrib':maghrib,'maghrib_j':maghrib_j, 'isha':isha,'isha_j':isha_j,'month':mon, 'date':date, 'weekday':weekday,'day_no':day_no, 'day_ab':day_ab})
+        month_data.append({
+            'fajr':fajr,'fajr_j':fajr_j,'sunrise':sunrise, 'dhuhr':dhuhr, 'dhuhr_j':dhuhr_j,'asr':asr,'asr_j':asr_j,'maghrib':maghrib,'maghrib_j':maghrib_j, 'isha':isha,'isha_j':isha_j,
+            'month':mon, 'date':date, 'weekday':weekday,'day_no':day_no, 'day_ab':day_ab,
+            'is_day_open': is_day_open,
+            'fajr_jamaah': day_schedule.get('fajr_jamaah', True),
+            'dhuhr_jamaah': day_schedule.get('dhuhr_jamaah', True),
+            'asr_jamaah': day_schedule.get('asr_jamaah', True),
+            'maghrib_jamaah': day_schedule.get('maghrib_jamaah', True),
+            'isha_jamaah': day_schedule.get('isha_jamaah', True)
+        })
     return month_data
 
 def month_view(request):

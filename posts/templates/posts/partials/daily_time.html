@@ -1,4 +1,5 @@
 {% load static %}
+{% load masjid_tags %}
 <div>
   <div class="pl-4 pb-2">
     <div class="join items-center place-self-center">
@@ -8,32 +9,52 @@
     </div>
   </div>
 
-  <!-- Fajr Card -->
-  <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
-    <!-- Left Side: Image -->
-    <figure class="max-w-[50px] max-h-[50px] bg-yellow-400 flex items-center justify-center">
-      <img src="{% static 'images/sunrise.png' %}" alt="fajr" class="w-full h-full object-cover" />
-    </figure>
+  {% if today_schedule.open %}
+    <!-- Fajr Card -->
+    <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+      <!-- Left Side: Image -->
+      <figure class="max-w-[50px] max-h-[50px] bg-yellow-400 flex items-center justify-center">
+        <img src="{% static 'images/sunrise.png' %}" alt="fajr" class="w-full h-full object-cover" />
+      </figure>
 
-    <!-- Right Side: Text Content -->
-    <div class="card-body pl-2 pt-1 leading-none">
+      <!-- Right Side: Text Content -->
+      <div class="card-body pl-2 pt-1 leading-none">
+            
+        <span class="flex justify-between">
+          <span class="text-sm font-bold">Fajr: <span id="T_Fajr text-xs">{{fajr}}</span></span>
           
-      <span class="flex justify-between">
-        <span class="text-sm font-bold">Fajr: <span id="T_Fajr text-xs">{{fajr}}</span></span>
-        
-        <span class="text-xs">
-          <img 
-          width="16" 
-          src="{% static 'images/sunrise_x16.png' %}" 
-          alt="Sunrise" 
-          class="inline-block" 
-        />
-        {{ sunrise }}</span>
-      </span>
-      <span>Jamaah: {{ fajr_j }}</span>
-          
+          <span class="text-xs">
+            <img 
+            width="16" 
+            src="{% static 'images/sunrise_x16.png' %}" 
+            alt="Sunrise" 
+            class="inline-block" 
+          />
+          {{ sunrise }}</span>
+        </span>
+        {% if today_schedule.fajr_jamaah %}
+          <span>Jamaah: {{ fajr_j }}</span>
+        {% else %}
+          <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+        {% endif %}
+            
+      </div>
     </div>
-  </div>
+  {% else %}
+    <!-- Fajr Card - Closed -->
+    <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
+      <!-- Left Side: Image -->
+      <figure class="max-w-[50px] max-h-[50px] bg-yellow-400 flex items-center justify-center">
+        <img src="{% static 'images/sunrise.png' %}" alt="fajr" class="w-full h-full object-cover" />
+      </figure>
+
+      <!-- Right Side: Text Content -->
+      <div class="card-body pl-2 pt-1 leading-none">
+        <span class="text-sm font-bold">Fajr: <span class="text-red-500 font-bold">CLOSED</span></span>
+        <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+      </div>
+    </div>
+  {% endif %}
 
   <!-- Dhuhr Card -->
   <div class="card md:card-side bg-base-100 shadow-xl max-h-[50px] w-full md:w-[250px] mb-2">
@@ -45,8 +66,17 @@
     <!-- Right Side: Text Content -->
     <div class="card-body pl-2 pt-1 leading-none">
           
-      <span class="text-sm font-bold">Dhuhr:<span id="T_Fajr text-xs">{{dhuhr}}</span></span>
-      <span>Jamaah: {{ dhuhr_j }}</span>
+      {% if today_schedule.open %}
+        <span class="text-sm font-bold">Dhuhr:<span id="T_Fajr text-xs">{{dhuhr}}</span></span>
+        {% if today_schedule.dhuhr_jamaah %}
+          <span>Jamaah: {{ dhuhr_j }}</span>
+        {% else %}
+          <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+        {% endif %}
+      {% else %}
+        <span class="text-sm font-bold">Dhuhr: <span class="text-red-500 font-bold">CLOSED</span></span>
+        <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+      {% endif %}
           
     </div>
   </div>
@@ -60,10 +90,17 @@
   
       <!-- Right Side: Text Content -->
       <div class="card-body pl-2 pt-1 leading-none">
-            
-        <span class="text-sm font-bold">Asr:<span id="T_Fajr text-xs">{{ asr }}</span></span>
-        <span>Jamaah: {{ asr_j }}</span>
-            
+        {% if today_schedule.open %}
+          <span class="text-sm font-bold">Asr:<span id="T_Fajr text-xs">{{ asr }}</span></span>
+          {% if today_schedule.asr_jamaah %}
+            <span>Jamaah: {{ asr_j }}</span>
+          {% else %}
+            <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+          {% endif %}
+        {% else %}
+          <span class="text-sm font-bold">Asr: <span class="text-red-500 font-bold">CLOSED</span></span>
+          <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+        {% endif %}
       </div>
     </div>
   
@@ -76,10 +113,17 @@
   
       <!-- Right Side: Text Content -->
       <div class="card-body pl-2 pt-1 leading-none">
-            
-        <span class="text-sm font-bold">Maghrib:<span id="T_Fajr text-xs">{{ maghrib }}</span></span>
-        <span>Jamaah: {{ maghrib_j }}</span>
-            
+        {% if today_schedule.open %}
+          <span class="text-sm font-bold">Maghrib:<span id="T_Fajr text-xs">{{ maghrib }}</span></span>
+          {% if today_schedule.maghrib_jamaah %}
+            <span>Jamaah: {{ maghrib_j }}</span>
+          {% else %}
+            <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+          {% endif %}
+        {% else %}
+          <span class="text-sm font-bold">Maghrib: <span class="text-red-500 font-bold">CLOSED</span></span>
+          <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+        {% endif %}
       </div>
     </div>
 
@@ -92,10 +136,17 @@
   
       <!-- Right Side: Text Content -->
       <div class="card-body pl-2 pt-1 leading-none">
-            
-        <span class="text-sm font-bold">Isha:<span id="T_Fajr text-xs">{{ isha }}</span></span>
-        <span>Jamaah: {{ isha_j }}</span>
-            
+        {% if today_schedule.open %}
+          <span class="text-sm font-bold">Isha:<span id="T_Fajr text-xs">{{ isha }}</span></span>
+          {% if today_schedule.isha_jamaah %}
+            <span>Jamaah: {{ isha_j }}</span>
+          {% else %}
+            <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+          {% endif %}
+        {% else %}
+          <span class="text-sm font-bold">Isha: <span class="text-red-500 font-bold">CLOSED</span></span>
+          <span>Jamaah: <span class="text-red-500 font-bold">CLOSED</span></span>
+        {% endif %}
       </div>
     </div>
 

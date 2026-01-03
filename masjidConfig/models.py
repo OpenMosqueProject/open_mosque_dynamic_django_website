@@ -4,6 +4,20 @@ from django.utils.translation import gettext as trans # for translating text
 
 from .singleton import SingletonModel
 from.constants import PRAYER_CALC_CHOICES, SHAFAQ_CHOICES, SCHOOL_CHOICES, FAJR_JAMAAH, DHUHR_JAMAAH, ASR_JAMAAH, MAGHRIB_JAMAAH, ISHA_JAMAAH, COLOR_CHOICES, SHAFI, GEN
+
+# Default schedule: Open Monday-Friday with all prayers, closed weekends
+DEFAULT_SCHEDULE = {
+    "monday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+    "tuesday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+    "wednesday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+    "thursday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+    "friday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+    "saturday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+    "sunday": {"open": True, "fajr_jamaah": True, "dhuhr_jamaah": True, "asr_jamaah": True, "maghrib_jamaah": True, "isha_jamaah": True},
+}
+
+def get_default_schedule():
+    return DEFAULT_SCHEDULE.copy()
 # Create your models here.
 
 class Theme(models.Model):
@@ -30,11 +44,17 @@ class CentreProfile(SingletonModel):
     school = models.IntegerField(choices=SCHOOL_CHOICES, default=SHAFI)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default=51.443909)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0.219730)
+    
+    # Weekly schedule: which days open and which prayers have jamaah each day
+    weekly_schedule = models.JSONField(default=get_default_schedule, help_text="Schedule of operating days and prayers with jamaah times")
+    
+    # Jamaah timing fields (for adjusting jamaah times relative to prayer times)
     fajr_jamaah_minutes = models.CharField(max_length=255, choices=FAJR_JAMAAH, blank=True)
     dhuhr_jamaah_minutes = models.CharField(max_length=255, choices=DHUHR_JAMAAH, blank=True)
     asr_jamaah_minutes = models.CharField(max_length=255, choices=ASR_JAMAAH, blank=True)
     maghrib_jamaah_minutes = models.CharField(max_length=255, choices=MAGHRIB_JAMAAH, blank=True)
     isha_jamaah_minutes = models.CharField(max_length=255, choices=ISHA_JAMAAH, blank=True)
+    
     theme_choice = models.CharField(max_length=255, choices=COLOR_CHOICES, default='light')
     facebook = models.CharField(max_length=255, blank=True)
     instagram = models.CharField(max_length=255, blank=True)

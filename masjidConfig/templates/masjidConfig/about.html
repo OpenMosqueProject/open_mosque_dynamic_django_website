@@ -38,12 +38,21 @@
     <div class="card w-full bg-base-300 card-xl shadow-sm">
       <div class="card-body">
         <h2 class="card-title">Address</h2>
-        {% if masjid.masjid_Name %}<p>{{ masjid.masjid_Name }}</p>{% endif %}
-        {% if masjid.address1 %}<p>{{ masjid.address1 }}</p>{% endif %}
-        {% if masjid.town %}<p>{{ masjid.town }}</p>{% endif %}
-        {% if masjid.city %}<p>{{ masjid.city }}</p>{% endif %}
-        {% if masjid.country %}<p>{{ masjid.country }}</p>{% endif %}
-        {% if masjid.postcode %}<p>{{ masjid.postcode }}</p>{% endif %}
+        <div role="alert" class="alert alert-primary bg-base-100 ">
+          <span>
+
+            {% if masjid.masjid_Name %}<p class="font-bold">{{ masjid.masjid_Name }}</p>{% endif %}
+            {% if masjid.address1 %}<p>{{ masjid.address1 }}</p>{% endif %}
+            {% if masjid.town %}<p>{{ masjid.town }}</p>{% endif %}
+            {% if masjid.city %}<p>{{ masjid.city }}</p>{% endif %}
+            {% if masjid.postcode %}<p>{{ masjid.postcode }}</p>{% endif %}
+            {% if masjid.country %}<p>{{ masjid.country }}</p>{% endif %}
+
+          </span>
+        </div>
+        
+        {% if masjid.mobile %}<p><i class="fa fa-phone pr-2"></i>{{ masjid.mobile }}</p>{% endif %}
+        {% if masjid.email %}<p><i class="fa fa-envelope pr-2"></i>{{ masjid.email }}</p>{% endif %}
         {% if masjid.what3words %}<p><img class="inline-block pr-2" width="30" src="{% static 'images/w3w.png' %}">
           <a href="https://what3words.com/{{masjid.what3words}}" >
             {{ masjid.what3words }}</a></p>

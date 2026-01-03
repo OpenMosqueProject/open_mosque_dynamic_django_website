@@ -19,7 +19,6 @@ Before trying to run the server
 - generate a secret key from here [djecrety.ir](https://djecrety.ir/)
 - between Git Pulls do not forget to run `pip install -r requirements.txt`
 - run `python manage.py makemigrations` and `python manage.py migrate`
-  - if you come into issues here (maybe on windows only) run `pip uninstall python-magic-bin`
 - run `python manage.py createsuperuser`
 - run `python manage.py runserver`
 
