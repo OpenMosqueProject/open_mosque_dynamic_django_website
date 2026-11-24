@@ -1,5 +1,5 @@
 Django==6.0
-pillow==12.1.0
+Pillow>=13.0.0
 fontawesomefree==6.6.0
 django-imagekit==5.0.0
 requests>=2.32.5
